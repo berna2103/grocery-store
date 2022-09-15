@@ -16,7 +16,6 @@ export default function Deparments(props) {
         {data.map((p) =>
           p.map((item) => (
             <div className={`col-lg-3 col-md-4 col-sm-6 col-xs mb-2`}>
-              {console.log(item)}
               <div className={`card bg-light ${styles.card} ${styles.cardOnHover}`}>
                 <div className={`row text-muted p-2`}>
                   <div className={`col-12 text-uppercase ms-3 mt-3`}>

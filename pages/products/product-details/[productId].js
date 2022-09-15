@@ -177,7 +177,6 @@ export async function getServerSideProps(context) {
   // You can use any data fetching library
   //const [promotions, isLoading] = useContentful('corporation')
   const { productId } = context.params;
-  console.log(productId);
 
   const product = await getContentfulItem(productId);
 
