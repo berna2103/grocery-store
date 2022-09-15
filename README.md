@@ -10,6 +10,32 @@ npm run dev
 yarn dev
 ```
 
+```bash
+npm i
+# or
+yarn i
+```
+
+## Contenful 
+Create a free contentful account and get you api keys:
+Sapce Id and Access Token
+
+
+
+## .env.local
+At the root directory, create the .env.local file and store the contentful api keys as follow:
+SPACE_ID=Yourspaceid
+ACCESS_TOKEN=YourAccessToken
+
+##Run dev server
+```bash
+npm run dev
+# or
+yarn run dev
+```
+
+
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
