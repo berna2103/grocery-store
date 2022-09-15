@@ -20,8 +20,6 @@ yarn i
 Create a free contentful account and get you api keys:
 Sapce Id and Access Token
 
-
-
 ## .env.local
 At the root directory, create the .env.local file and store the contentful api keys as follow:
 SPACE_ID=Yourspaceid
