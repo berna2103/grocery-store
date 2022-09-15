@@ -27,7 +27,7 @@ At the root directory, create the .env.local file and store the contentful api k
 SPACE_ID=Yourspaceid
 ACCESS_TOKEN=YourAccessToken
 
-##Run dev server
+## Run dev server
 ```bash
 npm run dev
 # or
