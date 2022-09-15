@@ -1,0 +1,34 @@
+[
+    {
+        "id": "PFM01",
+        "title": "57th and Kedzie",
+        "address": "5724 S Kedzie Ave",
+        "city": "Chicago",
+        "state": "IL",
+        "zipcode": "60629"
+    },
+    {
+        "id": "PFM02",
+        "title": "47th and Kedzie",
+        "address": "4700 S Kedzie Ave",
+        "city": "Chicago",
+        "state": "IL",
+        "zipcode": "60632"
+    },
+    {
+        "id": "PFM05",
+        "title": "118th and Ave O",
+        "address": "11800 Ave O",
+        "city": "Chicago",
+        "state": "IL",
+        "zipcode": "60617"
+    },
+    {
+        "id": "PFM06",
+        "title": "Madison and Western",
+        "address": "2333 W. Madison",
+        "city": "Chicago",
+        "state": "IL",
+        "zipcode": "60612"
+    }
+]

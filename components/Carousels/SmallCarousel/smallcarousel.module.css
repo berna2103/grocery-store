@@ -1,0 +1,39 @@
+.cardCustom{
+    min-height: 300px;
+    width: 14rem;
+    text-align: center;
+    align-items: center;
+    padding: 1rem;
+}
+.imgCard{
+    align-self: center;
+    margin-top: 1.5rem;
+}
+
+.swiper-container {
+    width: 450px;
+  }
+  @media screen and (min-width: 450) {
+    .swiper-container {
+      width: 450;
+    }
+  }
+
+  @media screen and (min-width: 540) {
+    .swiper-container {
+      width: 540;
+    }
+  }
+  
+  
+  @media screen and (min-width: 640px) {
+    .swiper-container {
+      width: 640px;
+    }
+  }
+  
+  @media screen and (min-width: 768px) {
+    .swiper-container {
+      width: 768px;
+    }
+  }

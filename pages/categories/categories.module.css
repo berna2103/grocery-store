@@ -1,0 +1,19 @@
+.imageResponsive {
+    max-height: 150px;
+    max-width: 150px;
+    object-fit: cover;
+}
+
+.subcategoryCardImage{
+    height: 75px;
+    width: 75px;
+    object-fit: cover;
+    align-self: center;
+    margin-top: 1rem;
+}
+
+.cardOnHover:hover{
+    box-shadow: 2px 2px 2px 2px gray;
+    color: white;
+}
+

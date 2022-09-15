@@ -1,0 +1,21 @@
+.imageResponsive{
+    max-width: 75px;
+    max-height: 75px;
+    align-self: center;
+    object-fit: cover;
+}
+
+.container p{
+   font-size: 12px;
+   color: black;
+}
+
+.cardCustom{
+    max-width: 12rem;
+    width: 12rem;
+}
+
+.cardOnHover:hover{
+    background-color: antiquewhite;
+    color: white;
+}

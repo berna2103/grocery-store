@@ -1,0 +1,11 @@
+
+.storeContainer{
+    min-height: 69vh;
+}
+
+.storeImage{
+   object-fit: cover;
+   height: 100%;
+   width: 100%;
+   max-height: 100vh;
+}

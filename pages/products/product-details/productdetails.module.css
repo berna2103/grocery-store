@@ -1,0 +1,14 @@
+.sliderImage{
+    object-fit: cover;
+    height: 500px;
+    width: auto;
+}
+
+@media only screen and (max-width: 760px) {
+    .sliderImage {
+      height: 275px;
+      width: auto;
+      object-fit: cover;
+      align-self: center;
+    }
+  }

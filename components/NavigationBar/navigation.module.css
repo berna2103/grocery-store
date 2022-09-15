@@ -1,0 +1,35 @@
+
+  .superNav {
+    font-size:12px;
+    letter-spacing: .1rem;
+  }
+  .topbaritem:hover {
+    color: white !important;
+    background-color: red;
+    border-radius: 5px;
+    padding: 5px;
+  }
+  .active {
+    background-color: black;
+    color: aliceblue !important;
+    margin: 1rem;
+  }
+  .form-control {
+    outline:none !important;
+    box-shadow: none !important;
+  }
+  .bi{
+    font-size: 1rem;
+    padding-right: .2rem;
+  }
+
+  .nav-item:hover{
+    background-color: black;
+    color: white;
+  }
+
+  @media screen and (max-width:760px){
+    .centerOnMobile {
+      text-align:center
+    }
+  }
