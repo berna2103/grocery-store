@@ -19,14 +19,14 @@ export default function Deparments(props) {
               <div className={`card bg-light ${styles.card} ${styles.cardOnHover}`}>
                 <div className={`row text-muted p-2`}>
                   <div className={`col-12 text-uppercase ms-3 mt-3`}>
-                    <p className={`lead`}>{item.fields.categoryName}</p>
+                    <p className={`lead`}>{`${item.fields.categoryName} (${item.fields.subCategory.length})`}</p>
                   </div>
                   <div className={`col-12 text-center mt-3 mb-5`}>
                     {!item.fields.categoryImage.fields.file.url ? (
                       <p></p>
                     ) : (
                       <img
-                        className={`img-fluid rounded-circle ${styles.imageResponsive}`}
+                        className={`img-fluid ${styles.imageResponsive}`}
                         src={item.fields.categoryImage.fields.file.url}
                         alt={item.fields.categoryName}
                       />

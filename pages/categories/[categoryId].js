@@ -10,9 +10,8 @@ export default function CategoryId(props) {
 
   return (
     <div className={`container`}>
-      {console.log(props)}
-      <div>
-        <h1 className={`display-6 mt-3`}>{props.subCategories.categoryName}</h1>
+      <div className={`container mt-3`}>
+        <h1 className={`display-6`}>Shop by category</h1>
       </div>
       <div className={`row mt-5`}>
         {subCategories.map((subCategory) => (
@@ -31,7 +30,7 @@ export default function CategoryId(props) {
                 />
               )}
               <div className={`card-title text-muted text-center mt-3`}>
-                {subCategory.fields.name}
+                {`${subCategory.fields.name} (${subCategory.fields.products.length})`}
               </div>
               <a
                 href={`/products/${subCategory.fields.name}/${subCategory.sys.id}`}
@@ -50,6 +49,7 @@ export async function getServerSideProps(context) {
   // You can use any data fetching library
   //const [promotions, isLoading] = useContentful('corporation')
   const { categoryId } = context.params;
+  console.log(context.params)
 
   const subCategories = await getContentfulItem(categoryId);
 

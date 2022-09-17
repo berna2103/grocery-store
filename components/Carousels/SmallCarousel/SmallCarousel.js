@@ -19,8 +19,7 @@ import "swiper/css/scrollbar";
 import "swiper/css/effect-fade";
 import ProductCard from "../../ProductCard/ProductCard.js";
 
-export default function SmallCarousel(props) {
-  const items = props.data;
+export default function SmallCarousel({items}) {
 
   if (!items) {
     return <p>loading ...</p>;
@@ -81,7 +80,7 @@ export default function SmallCarousel(props) {
       >
         {items.map((item) => (
           <SwiperSlide key={item.id}>
-            <ProductCard product= {item} />
+            {item}
           </SwiperSlide>
         ))}
       </Swiper>

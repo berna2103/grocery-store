@@ -1,7 +1,16 @@
 .imageResponsive {
-    max-height: 150px;
-    max-width: 150px;
+    min-height: 150px;
+    height: 150px;
+    width: 100%;
     object-fit: cover;
+    padding: 1rem;
+    margin: 0;
+    border-bottom-right-radius: 40px;
+    border-top-left-radius: 40px;
+}
+
+.card{
+    max-height: 250px;
 }
 
 .subcategoryCardImage{

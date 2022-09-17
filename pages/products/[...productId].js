@@ -4,6 +4,7 @@ import ProductCard from "../../components/ProductCard/ProductCard";
 
 export default function Product(props) {
   const data = props.products;
+  const pageTitle = props.title;
 
   if (!data) {
     return <p>No Products Found!</p>;
@@ -11,9 +12,10 @@ export default function Product(props) {
 
   return (
     <div className={`container-fluid`}>
+      <div className={`container`}>
+        <h1 className={`display-6 text-danger mt-4`}>{pageTitle}</h1>
+      </div>
       <div className={`row`}>
-        {console.log(data.products)}
-        <h1 className={`display-6 text-center mt-3`}>{data.name}</h1>
       </div>
       <div className={`row mt-3`}>
         <div className={`col-3 border`}>
@@ -38,13 +40,13 @@ export async function getServerSideProps(context) {
   // You can use any data fetching library
   //const [promotions, isLoading] = useContentful('corporation')
   const { productId } = context.params;
-  console.log(productId);
 
   const products = await getContentfulItem(productId[1]);
 
   return {
     props: {
-      products,
+      products: products,
+      title: productId[0]
     },
   };
 }

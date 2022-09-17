@@ -137,7 +137,7 @@ export default function NavigationBar() {
             <ul className="navbar-nav ms-auto ">
               <li className="nav-item">
                 <a className="nav-link mx-2 text-uppercase" href="/cart">
-                  <i className={`${styles.bi} bi-cart text-muted me-1`}></i>Cart
+                  <i className={`${styles.bi} bi-cart text-muted me-1`}></i>
                 </a>
               </li>
               <li className="nav-item">
@@ -145,7 +145,6 @@ export default function NavigationBar() {
                   <i
                     className={`${styles.bi} bi-person-circle text-muted me-1`}
                   ></i>
-                  Account
                 </a>
               </li>
             </ul>

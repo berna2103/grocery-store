@@ -13,6 +13,7 @@
 .cardCustom{
     max-width: 12rem;
     width: 12rem;
+    min-height: 250px;
 }
 
 .cardOnHover:hover{

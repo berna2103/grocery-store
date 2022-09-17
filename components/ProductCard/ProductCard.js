@@ -1,9 +1,11 @@
 import React from "react";
+import Loaading from "../Loading/Loaading";
 import styles from "./productcard.module.css";
 
 export default function ProductCard({ product }) {
+  
   if (!product) {
-    return <p>No product found!</p>;
+    return <Loaading />;
   }
   return (
     <div className={`${styles.container}`}>

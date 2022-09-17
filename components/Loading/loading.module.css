@@ -1,0 +1,10 @@
+.loadingFull{
+    height: 100vh;
+    width: 100%;
+    background-color: aliceblue;
+}
+
+.spinner{
+    display: flex;
+   
+}

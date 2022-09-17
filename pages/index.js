@@ -1,9 +1,13 @@
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
 import { getContentfulItems } from "../contentful/Contentful";
+import Carousel from "../components/Carousels/Carousel";
+import SpecialEvents from "../components/SpecialEvents/SpecialEvents";
+import Dropdown from "../components/Dropdown/Dropdown";
 
 export default function Home(props) {
   const locations = props.locations;
+  const specialEvents = props.specialEvents;
+  const event = [];
 
   if (!locations) {
     return <p>Loading .... </p>;
@@ -19,43 +23,36 @@ export default function Home(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {locations.map((location) =>
-        location.locations.map((store) => (
-          <div className={`container mt-2`}>
-            <a
-              onClick={selectStore}
-              key={store.sys.id}
-              className={`text-secondary`}
-            >
-              <span className={`text-danger`}>Shopping at: </span>
-              {store.fields.storeName}
-            </a>
-            {console.log(store)}
-          </div>
-        ))
+      <div className={`container text-center mb-3`}>
+        <Dropdown list = { locations } />
+      </div>
+
+      {specialEvents.map((item) =>{
+        event.push(<SpecialEvents key={item.sys.id} item={item} />)}
       )}
+
+      <div>
+        <Carousel items={event} />
+      </div>
+      
+
     </div>
   );
 }
-// This function gets called at build time on server-side.
-// It won't be called on client-side, so you can even do
-// direct database queries.
+
 export async function getServerSideProps() {
-  // Call an external API endpoint to get posts.
-  // You can use any data fetching library
-  //const [promotions, isLoading] = useContentful('corporation')
+
   const entries = await getContentfulItems("corporation");
+  const specialEvents = await getContentfulItems("specialEvents");
 
   const locations = entries.map((p) => {
     return p.fields;
-  });
-  //  const {fields, sys } = corporation
-  // By returning { props: { posts } }, the Blog component
-  // will receive `posts` as a prop at build time
+  })
 
   return {
     props: {
-      locations,
+      locations: locations,
+      specialEvents: specialEvents,
     },
   };
 }
