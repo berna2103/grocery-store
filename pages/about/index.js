@@ -88,25 +88,17 @@ export default function About(props) {
   );
 }
 
-// This function gets called at build time on server-side.
-// It won't be called on client-side, so you can even do
-// direct database queries.
-export async function getServerSideProps() {
-  // Call an external API endpoint to get posts.
-  // You can use any data fetching library
-  //const [promotions, isLoading] = useContentful('corporation')
+
+export async function getStaticProps() {
   const entries = await getContentfulItems("corporation");
 
   const locations = entries.map((p) => {
     return p.fields;
   });
-  //  const {fields, sys } = corporation
-  // By returning { props: { posts } }, the Blog component
-  // will receive `posts` as a prop at build time
-
   return {
     props: {
       locations,
     },
+    revalidate: 60
   };
 }

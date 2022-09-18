@@ -53,16 +53,18 @@ export default function ProductDetails(props) {
             className={`text-secondary`}
           >{`Calories per serving: ${productData.calories}`}</p>
 
-         {(productData.isOnSale === true && productData.onSalePrice > 0) ? (
-          <div>
-            <p className={`text-danger lead`}>
-              ${productData.onSalePrice} on sale!
-            </p>
-            <p className={`text-decoration-line-through`}>${productData.price} / each.</p>
-          </div>
-        ) : (
-          <p className={`text-danger`}>${productData.price} / each.</p>
-        )}
+          {productData.isOnSale === true && productData.onSalePrice > 0 ? (
+            <div>
+              <p className={`text-danger lead`}>
+                ${productData.onSalePrice} on sale!
+              </p>
+              <p className={`text-decoration-line-through`}>
+                ${productData.price} / each.
+              </p>
+            </div>
+          ) : (
+            <p className={`text-danger`}>${productData.price} / each.</p>
+          )}
 
           {/* <p className={`lead`}>${productData.price} / each</p> */}
           {/* <div className={`card p-2 mb-2`}>
@@ -122,12 +124,18 @@ export default function ProductDetails(props) {
           aria-labelledby="nav-home-tab"
         >
           <div className={`container`}>
-            {!productData.details ? <p className={`mt-4 fs-6`}>See package for details.</p> : <div>
-            {productData.details.content.map((detail) =>
-              detail.content.map((data) => (
-                <p className={`mt-4 fs-6`}>{data.value}</p>
-              ))
-            )}</div> }
+            {!productData.details ? (
+              <p className={`mt-4 fs-6`}>See package for details.</p>
+            ) : (
+              <div>
+                <p className={`mt-2`}>SKU: {productData.sku}</p>
+                {productData.details.content.map((detail) =>
+                  detail.content.map((data) => (
+                    <p className={`mt-2 fs-6`}>{data.value}</p>
+                  ))
+                )}
+              </div>
+            )}
           </div>
         </div>
         <div
@@ -137,7 +145,18 @@ export default function ProductDetails(props) {
           aria-labelledby="nav-profile-tab"
         >
           <div className={`container`}>
-            <p className={`fs-6 mt-4`}>See label for details.</p>
+            {console.log(productData.detail)}
+            {!productData.ingredients ? (
+              <p className={`mt-4 fs-6`}>See package for details.</p>
+            ) : (
+              <div>
+                {productData.ingredients.content.map((detail) =>
+                  detail.content.map((data) => (
+                    <p className={`mt-2 fs-6`}>{data.value}</p>
+                  ))
+                )}
+              </div>
+            )}
           </div>
         </div>
         <div
@@ -173,9 +192,7 @@ export default function ProductDetails(props) {
 }
 
 export async function getServerSideProps(context) {
-  // Call an external API endpoint to get posts.
-  // You can use any data fetching library
-  //const [promotions, isLoading] = useContentful('corporation')
+
   const { productId } = context.params;
 
   const product = await getContentfulItem(productId);
@@ -184,5 +201,6 @@ export async function getServerSideProps(context) {
     props: {
       product,
     },
+
   };
 }

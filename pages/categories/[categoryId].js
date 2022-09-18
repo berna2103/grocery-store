@@ -45,9 +45,7 @@ export default function CategoryId(props) {
 }
 
 export async function getServerSideProps(context) {
-  // Call an external API endpoint to get posts.
-  // You can use any data fetching library
-  //const [promotions, isLoading] = useContentful('corporation')
+
   const { categoryId } = context.params;
   console.log(context.params)
 
@@ -59,3 +57,4 @@ export async function getServerSideProps(context) {
     },
   };
 }
+

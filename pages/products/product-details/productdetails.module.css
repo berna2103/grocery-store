@@ -4,6 +4,10 @@
     width: auto;
 }
 
+.sku{
+  font-size: 12px;
+}
+
 @media only screen and (max-width: 760px) {
     .sliderImage {
       height: 275px;

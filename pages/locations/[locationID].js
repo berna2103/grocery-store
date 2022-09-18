@@ -20,7 +20,7 @@ export default function Location(props) {
           <h1 className={`display-6 mt-4`}>{data.storeName}</h1>
 
           <p className={`text-muted`}>
-            <i class="bi bi-phone"></i> {data.phoneNumber}
+            <i className="bi bi-phone"></i> {data.phoneNumber}
           </p>
           <address className={`text-muted`}>
             <span>
@@ -57,9 +57,6 @@ export default function Location(props) {
 }
 
 export async function getServerSideProps(context) {
-  // Call an external API endpoint to get posts.
-  // You can use any data fetching library
-  //const [promotions, isLoading] = useContentful('corporation')
   const { locationID } = context.params;
 
   const entries = await getContentfulItem(locationID);
@@ -70,3 +67,4 @@ export async function getServerSideProps(context) {
     },
   };
 }
+

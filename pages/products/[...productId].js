@@ -35,10 +35,8 @@ export default function Product(props) {
   );
 }
 
-export async function getServerSideProps(context) {
-  // Call an external API endpoint to get posts.
-  // You can use any data fetching library
-  //const [promotions, isLoading] = useContentful('corporation')
+export async function getServerSidePropsclear(context) {
+
   const { productId } = context.params;
 
   const products = await getContentfulItem(productId[1]);
@@ -50,3 +48,4 @@ export async function getServerSideProps(context) {
     },
   };
 }
+
