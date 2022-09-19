@@ -8,7 +8,6 @@ export default function Product(props) {
   const pageTitle = props.title;
 
   if (!data) {
-
     return <div className={`container`}><Loaading /></div>;
   }
 
@@ -68,9 +67,10 @@ export async function getStaticPaths() {
     // Get the paths we want to prerender based on posts
     // In production environments, prerender all pages
     // (slower builds, but faster initial page load)
-    const paths = entries.map((entry) => ({
-      params: { productId:[entry.sys.id] },
-    }))
+    // const paths = entries.map((entry) => ({
+    //   params: { productId:["a","b"] },
+    // }))
+    // console.log(entries)
     // { fallback: false } means other routes should 404
-    return { paths, fallback: true}
+    return { paths: [], fallback: 'blocking'}
 }
