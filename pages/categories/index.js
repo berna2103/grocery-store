@@ -57,7 +57,7 @@ const entries = await getContentfulItems("category");
   });
 
   return {
-    props: { categories },
+    props: { categories: categories },
     revalidate: 600,
   };
 }

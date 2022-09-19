@@ -65,7 +65,7 @@ export async function getServerSideProps() {
   });
   return {
     props: {
-      locations,
+      locations: locations,
     },
   };
 }

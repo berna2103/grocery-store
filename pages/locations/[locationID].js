@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { getContentfulItem } from "../../contentful/Contentful";
+import { getContentfulItem, getContentfulItems } from "../../contentful/Contentful";
 import styles from "./locations.module.css";
 
 export default function Location(props) {
@@ -56,7 +56,7 @@ export default function Location(props) {
   );
 }
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
   const { locationID } = context.params;
 
   const entries = await getContentfulItem(locationID);
@@ -68,3 +68,26 @@ export async function getServerSideProps(context) {
   };
 }
 
+export async function getStaticPaths() {
+  // When this is true (in preview environments) don't
+  // prerender any static pages
+  // (faster builds, but slower initial page load)
+  if (process.env.SKIP_BUILD_STATIC_GENERATION) {
+    return {
+      paths: [],
+      fallback: 'blocking',
+    }
+  }
+    // Call an external API endpoint to get posts
+
+    const entries = await getContentfulItems("location");
+    // Get the paths we want to prerender based on posts
+    // In production environments, prerender all pages
+    // (slower builds, but faster initial page load)
+    const paths = entries.map((entry) => ({
+      params: { locationID: entry.sys.id },
+    }))
+  
+    // { fallback: false } means other routes should 404
+    return { paths, fallback: false }
+}

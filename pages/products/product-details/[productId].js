@@ -1,5 +1,5 @@
 import React from "react";
-import { getContentfulItem } from "../../../contentful/Contentful";
+import { getContentfulItem, getContentfulItems } from "../../../contentful/Contentful";
 import styles from "./productdetails.module.css";
 // import Swiper core and required modules
 import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from "swiper";
@@ -66,11 +66,6 @@ export default function ProductDetails(props) {
             <p className={`text-danger`}>${productData.price} / each.</p>
           )}
 
-          {/* <p className={`lead`}>${productData.price} / each</p> */}
-          {/* <div className={`card p-2 mb-2`}>
-            <p>Available:</p>
-            <p> <i className="bi bi-truck"></i> Shipping</p>
-          </div> */}
           <button className={`btn btn-danger rounded-pill`}>
             Sign in to add
           </button>
@@ -145,7 +140,6 @@ export default function ProductDetails(props) {
           aria-labelledby="nav-profile-tab"
         >
           <div className={`container`}>
-            {console.log(productData.detail)}
             {!productData.ingredients ? (
               <p className={`mt-4 fs-6`}>See package for details.</p>
             ) : (
@@ -191,7 +185,7 @@ export default function ProductDetails(props) {
   );
 }
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
 
   const { productId } = context.params;
 
@@ -203,4 +197,28 @@ export async function getServerSideProps(context) {
     },
 
   };
+}
+
+export async function getStaticPaths() {
+  // When this is true (in preview environments) don't
+  // prerender any static pages
+  // (faster builds, but slower initial page load)
+  if (process.env.SKIP_BUILD_STATIC_GENERATION) {
+    return {
+      paths: [],
+      fallback: 'blocking',
+    }
+  }
+    // Call an external API endpoint to get posts
+
+    const entries = await getContentfulItems("product");
+    // Get the paths we want to prerender based on posts
+    // In production environments, prerender all pages
+    // (slower builds, but faster initial page load)
+    const paths = entries.map((entry) => ({
+      params: { productId: entry.sys.id },
+    }))
+  
+    // { fallback: false } means other routes should 404
+    return { paths, fallback: false }
 }

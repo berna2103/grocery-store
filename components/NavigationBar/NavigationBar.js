@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./navigation.module.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -66,15 +66,27 @@ export default function NavigationBar() {
 
           <div className="mx-auto my-3 d-lg-none d-sm-block d-xs-block">
             <div className="input-group">
-              <input type="text" placeholder="Find product" className="form-control border-danger" />
-              <button className="btn btn-danger text-white"><i className="bi bi-search"></i></button>
+              <input
+                type="text"
+                placeholder="Find product"
+                className="form-control border-danger"
+              />
+              <button className="btn btn-danger text-white">
+                <i className="bi bi-search"></i>
+              </button>
             </div>
           </div>
           <div className="collapse navbar-collapse" id="navbarNavDropdown">
             <div className="ms-auto d-none d-lg-block">
               <div className="input-group">
-                <input type="text" placeholder="Find product" className="form-control border-danger" />
-                <button className="btn btn-danger  text-white"><i className="bi bi-search"></i></button>
+                <input
+                  type="text"
+                  placeholder="Find product"
+                  className="form-control border-danger"
+                />
+                <button className="btn btn-danger  text-white">
+                  <i className="bi bi-search"></i>
+                </button>
               </div>
             </div>
             <ul className="navbar-nav ms-auto ">
@@ -106,7 +118,7 @@ export default function NavigationBar() {
                     router.pathname == "/categories" ? "active" : ""
                   } nav-link mx-2 text-uppercase`}
                   aria-current="page"
-                  href="/categories"
+                  // href="/categories"
                 >
                   Categories
                 </a>
