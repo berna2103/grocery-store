@@ -40,7 +40,7 @@ export default function Home(props) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
 
   const entries = await getContentfulItems("corporation");
   const specialEvents = await getContentfulItems("specialEvents");
@@ -53,7 +53,6 @@ export async function getStaticProps() {
     props: {
       locations: locations,
       specialEvents: specialEvents,
-    },
-    revalidate: 60
+    }
   };
 }

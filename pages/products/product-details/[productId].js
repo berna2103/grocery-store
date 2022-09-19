@@ -1,5 +1,5 @@
 import React from "react";
-import { getContentfulItem, getContentfulItems } from "../../../contentful/Contentful";
+import { getContentfulItem } from "../../../contentful/Contentful";
 import styles from "./productdetails.module.css";
 // import Swiper core and required modules
 import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from "swiper";
@@ -209,16 +209,16 @@ export async function getStaticPaths() {
       fallback: 'blocking',
     }
   }
-    // Call an external API endpoint to get posts
+    // // Call an external API endpoint to get posts
 
-    const entries = await getContentfulItems("product");
-    // Get the paths we want to prerender based on posts
-    // In production environments, prerender all pages
-    // (slower builds, but faster initial page load)
-    const paths = entries.map((entry) => ({
-      params: { productId: entry.sys.id },
-    }))
+    // const entries = await getContentfulItems("product");
+    // // Get the paths we want to prerender based on posts
+    // // In production environments, prerender all pages
+    // // (slower builds, but faster initial page load)
+    // const paths = entries.map((entry) => ({
+    //   params: { productId: entry.sys.id },
+    // }))
   
     // { fallback: false } means other routes should 404
-    return { paths, fallback: false }
+    return { paths: [], fallback: 'blocking' }
 }
