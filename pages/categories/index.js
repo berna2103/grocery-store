@@ -1,4 +1,5 @@
 import React from "react";
+import ListOfCategories from "../../components/ListOfCategories/ListOfCategories";
 import { getContentfulItems } from "../../contentful/Contentful";
 import styles from "./categories.module.css";
 
@@ -42,6 +43,7 @@ export default function Deparments(props) {
           ))
         )}
       </div>
+      <ListOfCategories data={data}/>
     </div>
   );
 }

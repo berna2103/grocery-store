@@ -27,7 +27,7 @@ export default function SmallCarousel({items}) {
 
   return (
     <div className="container">
-      <p className="display-4 text-danger mt-5">Stock up and save!</p>
+      <p className="display-6 text-danger mt-5">Related Products</p>
       <p className="lead text-muted"></p>
       <Swiper
         // install Swiper modules
