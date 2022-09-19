@@ -1,13 +1,15 @@
 import React from "react";
 import { getContentfulItem, getContentfulItems } from "../../contentful/Contentful";
 import ProductCard from "../../components/ProductCard/ProductCard";
+import Loaading from "../../components/Loading/Loaading";
 
 export default function Product(props) {
   const data = props.products;
   const pageTitle = props.title;
 
   if (!data) {
-    return <p>No Products Found!</p>;
+
+    return <div className={`container`}><Loaading /></div>;
   }
 
   return (
@@ -54,12 +56,12 @@ export async function getStaticPaths() {
   // When this is true (in preview environments) don't
   // prerender any static pages
   // (faster builds, but slower initial page load)
-  if (process.env.SKIP_BUILD_STATIC_GENERATION) {
-    return {
-      paths: [],
-      fallback: false,
-    }
-  }
+  // if (process.env.SKIP_BUILD_STATIC_GENERATION) {
+  //   return {
+  //     paths: [],
+  //     fallback: false,
+  //   }
+  // }
     // Call an external API endpoint to get posts
 
     const entries = await getContentfulItems("product");
@@ -69,7 +71,6 @@ export async function getStaticPaths() {
     const paths = entries.map((entry) => ({
       params: { productId:[entry.sys.id] },
     }))
-   console.log(entries)
     // { fallback: false } means other routes should 404
-    return { paths, fallback: false}
+    return { paths, fallback: true}
 }
