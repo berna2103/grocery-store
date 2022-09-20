@@ -16,7 +16,7 @@ export default function Popular(props) {
   }
   return (
     <div className={`container`}>
-      <div className={`container mt-4`}>
+      <div className={`container`}>
         {popularProducts.map((item, index) => {
           if (index % 4 === 0) {
             banner.push(<CarouselItem key={item.sys.id} item={item} />);
@@ -24,7 +24,9 @@ export default function Popular(props) {
             popular.push(<ProductCard key={item.sys.id} product={item} />);
           }
         })}
+        <h1 className={`display-6 mt-5`}>Popular products!</h1>
         <Carousel items={banner} />
+        <h1 className={`display-6 mt-5`}>Best sellers!</h1>
         <SmallCarousel items={popular} />
       </div>
     </div>

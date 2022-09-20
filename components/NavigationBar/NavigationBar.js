@@ -49,7 +49,7 @@ export default function NavigationBar() {
       <nav className="navbar navbar-expand-lg bg-white sticky-top navbar-light p-3 shadow-lg">
         <div className="container">
           <a className="navbar-brand" href="/">
-            <i className={`${styles.bi} bi-shop text-muted me-1`}></i>{" "}
+            <i className={`${styles.bi} bi-shop text-muted me-1`}></i>
             <strong>Pete's Fresh</strong>
           </a>
           <button
@@ -148,7 +148,7 @@ export default function NavigationBar() {
             </ul>
             <ul className="navbar-nav ms-auto ">
               <li className="nav-item">
-                <a className="nav-link mx-2 text-uppercase" href="/cart">
+                <a className="nav-link mx-2" href="/cart">
                   <i className={`${styles.bi} bi-cart text-muted me-1`}></i>
                 </a>
               </li>

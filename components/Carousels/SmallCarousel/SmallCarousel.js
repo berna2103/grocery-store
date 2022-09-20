@@ -6,7 +6,6 @@ import {
   Scrollbar,
   A11y,
   EffectFade,
-  Autoplay,
 } from "swiper";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -17,7 +16,6 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "swiper/css/effect-fade";
-import ProductCard from "../../ProductCard/ProductCard.js";
 
 export default function SmallCarousel({items}) {
 
@@ -26,9 +24,7 @@ export default function SmallCarousel({items}) {
   }
 
   return (
-    <div className="container">
-      <p className="display-6 text-danger mt-5">Related Products</p>
-      <p className="lead text-muted"></p>
+    <div className="container mt-5">
       <Swiper
         // install Swiper modules
         modules={[
@@ -37,7 +33,6 @@ export default function SmallCarousel({items}) {
           Scrollbar,
           A11y,
           EffectFade,
-          Autoplay,
         ]}
         //   spaceBetween={120}
         //   slidesPerView={1}

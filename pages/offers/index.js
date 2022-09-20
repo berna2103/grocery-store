@@ -10,14 +10,13 @@ export default function Offers(props) {
   const list = props.offers;
   const offers = [];
   const products = [];
-  const data = props.rot;
 
   if (!props) {
     return <Loading />;
   }
   return (
     <div className={`${styles.offers} container`}>
-      <p className="display-4 text-danger">Top deals this week!</p>
+      <h1 className="display-6 mb-5">Top deals this week!</h1>
       <p className="lead text-muted"></p>
       {list.map((item, index) => {
         if (index % 4 === 0) {
@@ -27,6 +26,7 @@ export default function Offers(props) {
         }
       })}
       <Carousel items={offers} />
+      <h1 className={`display-6 mt-5`}>More great offers!</h1>
       <SmallCarousel items={products} />
     </div>
   );
