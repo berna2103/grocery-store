@@ -20,18 +20,7 @@ export default function Home(props) {
   const moreDeals = [];
   const event = [];
 
-  if (!props.locations) {
-    console.log(locations);
-    return <Loaading />;
-  }
-
-  if (!props.specialEvents) {
-    console.log(specialEvents);
-    return <Loaading />;
-  }
-
-  if (!props.products) {
-    console.log(products);
+  if (!props) {
     return <Loaading />;
   }
 
@@ -63,7 +52,7 @@ export default function Home(props) {
         <div className={`container`}>
           <div className={`row mt-5`}>
             {diets.map((diet) => (
-              <div className={`col-lg-4`}>
+              <div className={`col-lg-4 col-md-4 col-sm-6`}>
                 <Card
                   key={diet.sys.id}
                   data={diet}
@@ -71,18 +60,19 @@ export default function Home(props) {
                   title={diet.fields.title}
                   buttonLabel={diet.fields.buttonLabel}
                   description={diet.fields.description}
+                  link={`/specialty-diets/${diet.fields.title}/${diet.sys.id}`}
                   imageUrl={diet.fields.imageUrl.fields.file.url}
                 />
               </div>
             ))}
           </div>
-          <Link href="/specialty-diets"><a className={`text-danger ms-2`} >Explore all diets > </a></Link>
-          
+          <Link href="/specialty-diets">
+            <a className={`text-danger ms-2`}>Explore all diets {' > '}</a>
+          </Link>
         </div>
       )}
 
       <div className={`container`}>
-        
         <h1 className={`display-6 mt-5`}>Great Deals!</h1>
 
         {products.map((item, index) => {
@@ -116,9 +106,11 @@ export async function getStaticProps() {
     return p.fields;
   });
 
+  const diets = diet.slice(0, 3);
+
   return {
     props: {
-      diet: diet,
+      diet: diets,
       locations: locations,
       specialEvents: specialEvents,
       products: products,

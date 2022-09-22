@@ -21,14 +21,14 @@ export default function Diets(props) {
               id = {item.sys.id}
               description ={item.fields.description}
               buttonLabel = {item.fields.buttonLabel}
-              link = {`/specialty-diets/${item.sys.id}`}
+              link={`/specialty-diets/${item.fields.title}/${item.sys.id}`}
               imageUrl ={item.fields.imageUrl.fields.file.url}/>);
           }
         )}
         <Carousel items={popularCarousel} />
 
         <div className={`container mt-5`}>
-          <h1 className={`display-6`}>All Diets</h1>
+          <h1 className={`display-6`}>Explore other diets</h1>
           <div className={`row`}>
             {allDiets.map(diet => (
                <div className={`col-4`}>
@@ -36,6 +36,7 @@ export default function Diets(props) {
                   key={diet.sys.id}
                   data={diet}
                   id={diet.sys.id}
+                  link={`/specialty-diets/${diet.fields.title}/${diet.sys.id}`}
                   title={diet.fields.title}
                   buttonLabel={diet.fields.buttonLabel}
                   description={diet.fields.description}
@@ -59,4 +60,3 @@ export async function getStaticProps() {
     props: { diets: diets, popularDiets: popularDiets },
   };
 }
-

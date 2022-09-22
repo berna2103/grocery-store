@@ -49,8 +49,9 @@ export default function NavigationBar() {
       <nav className="navbar navbar-expand-lg bg-white sticky-top navbar-light p-3 shadow-lg">
         <div className="container">
           <a className="navbar-brand" href="/">
-            <i className={`${styles.bi} bi-shop text-muted me-1`}></i>
-            <strong>Pete's Fresh</strong>
+            {/* <i className={`${styles.bi} bi-shop text-muted me-1`}></i>
+            <strong>Pete's Fresh</strong> */}
+            <img className={`${styles.logo}`} src="./images/logo.jpeg" alt="logo"/>
           </a>
           <button
             className="navbar-toggler"

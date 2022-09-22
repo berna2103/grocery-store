@@ -23,6 +23,15 @@
     padding-right: .2rem;
   }
 
+  .logo{
+    height: 100px;
+    width: auto;
+    margin-top: -45px;
+    position:absolute;
+   
+    object-fit: scale-down;
+  }
+
   .nav-item:hover{
     background-color: black;
     color: white;
