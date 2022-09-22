@@ -1,15 +1,11 @@
 import React from "react";
-import Image from "next/image";
 import styles from "./carousel.module.css";
 
 export default function CarouselItem(props) {
+  
   const data = props.item;
-  const myLoader = () => {
-    return `${data.imgURL}`;
-  };
 
   if (!data) {
-    console.log(props);
     return <p>loading ...</p>;
   }
 

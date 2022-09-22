@@ -8,7 +8,7 @@ import ProductCard from "../components/ProductCard/ProductCard";
 import SmallCarousel from "../components/Carousels/SmallCarousel/SmallCarousel";
 import Card from "../components/Card/Card";
 import Loaading from "../components/Loading/Loaading";
-import { useState } from "react";
+import Link from "next/link";
 
 export default function Home(props) {
   const locations = props.locations;
@@ -76,10 +76,13 @@ export default function Home(props) {
               </div>
             ))}
           </div>
+          <Link href="/specialty-diets"><a className={`text-danger ms-2`} >Explore all diets > </a></Link>
+          
         </div>
       )}
 
       <div className={`container`}>
+        
         <h1 className={`display-6 mt-5`}>Great Deals!</h1>
 
         {products.map((item, index) => {
@@ -99,7 +102,7 @@ export default function Home(props) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const diet = await getContentfulItems("diet");
   const entries = await getContentfulItems("corporation");
   const specialEvents = await getContentfulItems("specialEvents");

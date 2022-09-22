@@ -70,8 +70,8 @@ export default function SmallCarousel({items}) {
         }}
         //   navigation
         pagination={{ clickable: true }}
-        onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={() => console.log("slide change")}
+        // onSwiper={(swiper) => console.log(swiper)}
+        // onSlideChange={() => console.log("slide change")}
       >
         {items.map((item) => (
           <SwiperSlide key={item.id}>
