@@ -46,11 +46,9 @@ export default function NavigationBar() {
           </div>
         </div>
       </div>
-      <nav className="navbar navbar-expand-lg bg-white sticky-top navbar-light p-3 shadow-lg">
+      <nav className="navbar navbar-expand-lg bg-white sticky-top navbar-light p-2 border-bottom">
         <div className="container">
           <a className="navbar-brand" href="/">
-            {/* <i className={`${styles.bi} bi-shop text-muted me-1`}></i>
-            <strong>Pete's Fresh</strong> */}
             <img className={`${styles.logo}`} src="./images/logo.jpeg" alt="logo"/>
           </a>
           <button
@@ -85,7 +83,7 @@ export default function NavigationBar() {
                   placeholder="Find product"
                   className="form-control border-danger"
                 />
-                <button className="btn btn-danger  text-white">
+                <button className="btn btn-sm btn-danger  text-white">
                   <i className="bi bi-search"></i>
                 </button>
               </div>

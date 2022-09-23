@@ -48,7 +48,7 @@ export default function Carousel({ items }) {
         }}
         // navigation
         pagination={{ clickable: true }}
-        onSwiper={(swiper) => console.log(swiper)}
+        // onSwiper={(swiper) => console.log(swiper)}
       >
         {items.map((item) => (
           <SwiperSlide>{item}</SwiperSlide>

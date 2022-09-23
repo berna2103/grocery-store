@@ -7,7 +7,6 @@ export default function Deparments(props) {
   const data = props.categories;
 
   if (!data) {
-    console.log(data);
     return <p>Loading .....</p>;
   }
   return (
