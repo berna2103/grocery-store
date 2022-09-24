@@ -49,7 +49,7 @@ export default function NavigationBar() {
       <nav className="navbar navbar-expand-lg bg-white sticky-top navbar-light p-2 border-bottom">
         <div className="container">
           <a className="navbar-brand" href="/">
-            <img className={`${styles.logo}`} src="./images/logo.jpeg" alt="logo"/>
+            <img className={`${styles.logo}`} src="/images/Logo.jpeg" alt="logo"/>
           </a>
           <button
             className="navbar-toggler"

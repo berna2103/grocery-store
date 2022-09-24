@@ -1,7 +1,7 @@
 import React from "react";
-import styles from './dietId.module.css'
+import styles from "./dietId.module.css";
 import { getContentfulItem } from "../../contentful/Contentful";
-import ProductCard from '../../components/ProductCard/ProductCard'
+import ProductCard from "../../components/ProductCard/ProductCard";
 
 export default function SpecialtyDiets(props) {
   const diet = props.diet;
@@ -10,11 +10,24 @@ export default function SpecialtyDiets(props) {
   return (
     <div className={`container`}>
       {console.log(diet.overview)}
-      <h1 className={`display-6 mt-5 ms-2`}>{pageTitle} products</h1>
-      <div className={`container `}>
-        <img className={`img-fluid ${styles.banner}`} src={diet.imageUrl.fields.file.url} alt={diet.title}/>
+      <div className={`container mt-5`}>
+        <div className={`row bg-light`}>
+          <div className={`col-lg-6 my-auto g-0`}>
+            <div className={`container ms-4`}>
+              <h1 className={`display-6`}>{pageTitle}</h1>
+              <p className={`lead`}>{diet.description}</p>
+            </div>
+          </div>
+          <div className={`col-lg-6 g-0`}>
+            <img
+              className={`img-fluid ${styles.banner}`}
+              src={diet.imageUrl.fields.file.url}
+              alt={diet.title}
+            />
+          </div>
+        </div>
       </div>
-      <div className={`container`}>
+      {/* <div className={`container`}>
       {!diet.overview ? (
               <p className={`mt-4 fs-6`}></p>
             ) : (
@@ -26,13 +39,22 @@ export default function SpecialtyDiets(props) {
                 )}
               </div>
             )}
-      </div>
+      </div> */}
       <div>
-        <h1 className={`display-6 mt-5`}>Buy products</h1>
+        <h1 className={`display-6 mt-5`}>Buy {pageTitle} friendly products</h1>
       </div>
-      {!diet.products ? <p></p> : diet.products.map(product => (
-        <ProductCard product={product} />
-      ))} 
+      <div className={`row`}>
+        {!diet.products ? (
+          <p></p>
+        ) : (
+          diet.products.map((product) => (
+            <div className={`col-lg-2`}>
+              {" "}
+              <ProductCard product={product} />
+            </div>
+          ))
+        )}
+      </div>
     </div>
   );
 }
