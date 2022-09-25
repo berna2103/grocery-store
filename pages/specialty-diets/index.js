@@ -31,7 +31,7 @@ export default function Diets(props) {
           <h1 className={`display-6`}>Explore other diets</h1>
           <div className={`row`}>
             {allDiets.map(diet => (
-               <div className={`col-4`}>
+               <div className={`col-lg-4 col-md-6`}>
                  <Card    
                   key={diet.sys.id}
                   data={diet}

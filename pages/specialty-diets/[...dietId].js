@@ -9,16 +9,15 @@ export default function SpecialtyDiets(props) {
 
   return (
     <div className={`container`}>
-      {console.log(diet.overview)}
       <div className={`container mt-5`}>
-        <div className={`row bg-light`}>
-          <div className={`col-lg-6 my-auto g-0`}>
-            <div className={`container ms-4`}>
+        <div className={`row bg-light `}>
+          <div className={`col-lg-6 my-auto mt-5`}>
+            <div className={`container`}>
               <h1 className={`display-6`}>{pageTitle}</h1>
               <p className={`lead`}>{diet.description}</p>
             </div>
           </div>
-          <div className={`col-lg-6 g-0`}>
+          <div className={`col-lg-6 g-0 order-first`}>
             <img
               className={`img-fluid ${styles.banner}`}
               src={diet.imageUrl.fields.file.url}
@@ -27,29 +26,15 @@ export default function SpecialtyDiets(props) {
           </div>
         </div>
       </div>
-      {/* <div className={`container`}>
-      {!diet.overview ? (
-              <p className={`mt-4 fs-6`}></p>
-            ) : (
-              <div>
-                {diet.overview.content.map((detail) =>
-                  detail.content.map((data) => (
-                    <p className={`mt-2 fs-6`}>{data.value}</p>
-                  ))
-                )}
-              </div>
-            )}
-      </div> */}
       <div>
         <h1 className={`display-6 mt-5`}>Buy {pageTitle} friendly products</h1>
       </div>
-      <div className={`row`}>
+      <div className={`row g-2`}>
         {!diet.products ? (
           <p></p>
         ) : (
           diet.products.map((product) => (
-            <div className={`col-lg-2`}>
-              {" "}
+            <div className={`col-lg-2 col-md-4 col`}>
               <ProductCard product={product} />
             </div>
           ))

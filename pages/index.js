@@ -52,7 +52,7 @@ export default function Home(props) {
         <div className={`container`}>
           <div className={`row mt-5`}>
             {diets.map((diet) => (
-              <div className={`col-lg-4 col-md-4 col-sm-6`}>
+              <div className={`col-lg-4 col-md-6 col-sm-6`}>
                 <Card
                   key={diet.sys.id}
                   data={diet}
