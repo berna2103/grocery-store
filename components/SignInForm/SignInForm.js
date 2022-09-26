@@ -32,7 +32,7 @@ export default function SignIn(){
       <div className="form-signin text-center">
         <form onSubmit={handleSubmit}>
           <Link href={'/'}>
-              <img className="mb-4" src={'/images/logo.jpeg'} alt="" height="75"/>
+              <img className="mb-4" src={'/images/Logo.jpeg'} alt="" height="75"/>
           </Link>
           <h1 className="lead mb-3 fw-normal">Please sign in</h1>  
           <div className="form-floating mb-1">

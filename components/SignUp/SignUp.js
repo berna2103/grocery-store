@@ -24,7 +24,7 @@ export default function SignUp(){
             <Link href={'/'}>
               <img 
                 className="mb-4" 
-                src={'/images/logo.jpeg'} 
+                src={'/images/Logo.jpeg'} 
                 alt=""  
                 height="75"/>
             </Link>
