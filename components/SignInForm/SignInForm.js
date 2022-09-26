@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { useState } from "react"
-import { useLogIn } from "../../hooks/useLogIn"
+import { useLogIn } from "../../hooks/useLogin"
 import { useResetPassword } from "../../hooks/useResetPassword"
 import MyModal from "../Modal/MyModal"
 import SignUp from "../SignUp/SignUp"
