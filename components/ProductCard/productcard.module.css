@@ -20,3 +20,26 @@
     background-color: antiquewhite;
     color: white;
 }
+
+.button:before {
+    content: 'Sign In to Add';
+}
+
+@media screen and (max-width: 600px) {
+    .button:before {
+        content: "\F242";
+        font-family: 'Bootstrap-icons';
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .cardCustom{
+        max-width: 9rem;
+        width: 9rem;
+        min-height: 250px;
+    }
+    .imageResponsive{
+        max-width: 50px;
+        max-height: 50px;
+    }
+  }

@@ -33,8 +33,8 @@ export default function ProductCard({ product }) {
           <p className={`text-danger`}>${product.fields.price}</p>
         )}
 
-        <button className={`btn btn-danger btn-sm rounded-pill me-4 ms-4`}>
-          Sign in to add
+        <button className={`btn btn-danger btn-sm ${styles.button} rounded-pill me-4 ms-4`}>
+        {/* <i className="bi bi-basket"></i> */}
         </button>
         <a
           href={`/products/product-details/${product.sys.id}`}
