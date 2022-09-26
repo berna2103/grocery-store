@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./navigation.module.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import MyModal from "../Modal/MyModal";
+import SignInForm from "../SignInForm/SignInForm";
+import ProductCard from "../ProductCard/ProductCard";
 
 export default function NavigationBar() {
   const router = useRouter();
+
+  const [modalShow, setModalShow] = useState(false);
 
   return (
     <>
@@ -49,7 +54,11 @@ export default function NavigationBar() {
       <nav className="navbar navbar-expand-lg bg-white sticky-top navbar-light p-2 border-bottom">
         <div className="container">
           <a className="navbar-brand" href="/">
-            <img className={`${styles.logo}`} src="/images/Logo.jpeg" alt="logo"/>
+            <img
+              className={`${styles.logo}`}
+              src="/images/Logo.jpeg"
+              alt="logo"
+            />
           </a>
           <button
             className="navbar-toggler"
@@ -152,8 +161,9 @@ export default function NavigationBar() {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link mx-2 text-uppercase" href="/account">
+                <a className="nav-link mx-2 text-uppercase" href="#">
                   <i
+                    onClick={() => setModalShow(true)}
                     className={`${styles.bi} bi-person-circle text-muted me-1`}
                   ></i>
                 </a>
@@ -162,6 +172,9 @@ export default function NavigationBar() {
           </div>
         </div>
       </nav>
+      <MyModal show={modalShow} onHide={() => setModalShow(false)}>
+        <SignInForm />
+      </MyModal>
     </>
   );
 }
