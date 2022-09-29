@@ -6,7 +6,7 @@ import MyModal from "../Modal/MyModal"
 import SignUp from "../SignUp/SignUp"
 
 
-export default function SignIn(){
+export default function SignIn({handleModal}){
 
   const [modalShow, setModalShow] = useState(false);
   const [email, setEmail] = useState('')
@@ -17,16 +17,17 @@ export default function SignIn(){
   const handleSubmit = (e) => {
     e.preventDefault()
     logIn(email, password)
-    setModalShow(false)
-
   }
   const handlePasswordReset = (e) => {
     e.preventDefault()
     resetPassword(email)
   }
-  function handleModalsClose() {
-    setModalShow(true)
+
+  const handleSignInModal = () => {
+    setModalShow(false)
+    handleModal()
   }
+
   return(
     <main className="center-screen p-4">
       <div className="form-signin text-center">
@@ -68,14 +69,14 @@ export default function SignIn(){
           </button>
           <br></br>
           <p>Not registered yet, please 
-            <a className='link-danger' onClick={handleModalsClose} href='#'>Sign Up</a>
+            <a className='link-danger' onClick={() => setModalShow(true)} href='#'>Sign Up</a>
           </p>
           <p className="mb-3 text-muted">{error && <p>{error}</p>}</p>
           <a href='#' className="link-danger" onClick={handlePasswordReset}>Reset Password</a> 
         </form>
       </div>
       <MyModal show={modalShow} onHide={() => setModalShow(false)}>
-        <SignUp show={modalShow}/>
+        <SignUp handleModal={handleSignInModal}/>
       </MyModal>
     </main>    
   )

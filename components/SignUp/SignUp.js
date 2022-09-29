@@ -2,9 +2,12 @@
 import { useState } from "react";
 import { useSignUp } from "../../hooks/useSignUp";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 
-export default function SignUp(){
+export default function SignUp({handleModal}){
+
+    const router = useRouter()
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -14,7 +17,8 @@ export default function SignUp(){
     const handleSubmit = (e) => {
       e.preventDefault()
       signUp(email, password)
-      setModalShow(false)
+      handleModal()
+      router.push('/')
     }
  
     return(

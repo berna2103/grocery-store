@@ -41,7 +41,6 @@ export default function Document() {
           src="https://kit.fontawesome.com/e20sdfsd9.js"
           crossOrigin="anonymous"
         ></script>
-        
       </Head>
       <body>
         <Main />

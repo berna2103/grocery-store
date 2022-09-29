@@ -18,7 +18,7 @@ export default function CategoryId(props) {
           <div className={`col-lg-2 col-md-3 col-sm-6 col-xm-3 mb-2`}>
             <div
               key={subCategory.sys.id}
-              className={`card ${styles.card} ${styles.cardOnHover}`}
+              className={`card border-0 ${styles.card} ${styles.cardOnHover}`}
             >
               {!subCategory.fields.subcategoryImage.fields.file.url ? (
                 <p></p>

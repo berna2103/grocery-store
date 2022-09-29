@@ -5,11 +5,17 @@ import { useRouter } from "next/router";
 import MyModal from "../Modal/MyModal";
 import SignInForm from "../SignInForm/SignInForm";
 import ProductCard from "../ProductCard/ProductCard";
+import SignUp from "../SignUp/SignUp";
 
 export default function NavigationBar() {
   const router = useRouter();
 
-  const [modalShow, setModalShow] = useState(false);
+  const [modalShowSignIn, setModalShowSignIn] = useState(false);
+  const [modalShowSignUp, setModalShowSignUp] = useState(false);
+
+  const handleModal = () => {
+    setModalShowSignIn(false);
+  };
 
   return (
     <>
@@ -160,20 +166,58 @@ export default function NavigationBar() {
                   <i className={`${styles.bi} bi-cart text-muted me-1`}></i>
                 </a>
               </li>
-              <li className="nav-item">
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link dropdown-toggle"
+                  href="#"
+                  id="navbarDropdownMenuLink"
+                  data-bs-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <i
+                    className={`${styles.bi} bi-person-circle text-muted me-1`}
+                  ></i>
+                </a>
+                <div
+                  className="dropdown-menu"
+                  aria-labelledby="navbarDropdownMenuLink"
+                >
+                  <a
+                    className="dropdown-item text-uppercase text-muted"
+                    href="#"
+                    onClick={() => setModalShowSignIn(true)}
+                  >
+                    Sign In
+                  </a>
+                  <a className="dropdown-item text-uppercase text-muted"
+                   href="#"
+                   onClick={() => setModalShowSignUp(true)}>
+                    Sign Up
+                  </a>
+                  <a className="dropdown-item text-uppercase text-muted" href="#">
+                    Log Out
+                  </a>
+                </div>
+              </li>
+              {/* <li className="nav-item">
                 <a className="nav-link mx-2 text-uppercase" href="#">
                   <i
                     onClick={() => setModalShow(true)}
                     className={`${styles.bi} bi-person-circle text-muted me-1`}
                   ></i>
                 </a>
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>
       </nav>
-      <MyModal show={modalShow} onHide={() => setModalShow(false)}>
-        <SignInForm />
+      <MyModal show={modalShowSignIn} onHide={() => setModalShowSignIn(false)}>
+        <SignInForm handleModal={handleModal} />
+      </MyModal>
+
+      <MyModal show={modalShowSignUp} onHide={() => setModalShowSignUp(false)}>
+        <SignUp handleModal={handleModal} />
       </MyModal>
     </>
   );
