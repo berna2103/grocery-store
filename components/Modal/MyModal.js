@@ -10,7 +10,7 @@ export default function MyModal({show, onHide, children}) {
       centered
       animation
     >
-      <Modal.Header closeButton onClick={onHide}>
+      <Modal.Header closeButton onClick={onHide} className={`border-0`}>
       </Modal.Header>
       <Modal.Body>
         {children}

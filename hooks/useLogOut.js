@@ -1,17 +1,17 @@
 import { auth } from '../config/firebaseConfig'
 import { signOut } from 'firebase/auth'
-import { useNavigate } from 'react-router-dom'
 import { useAuthContext } from './useAuthContext'
+import { useRouter } from 'next/router'
  
 export const useLogOut = () => {
+  const router = useRouter()
 
-  const navigate = useNavigate()
   const { dispatch } = useAuthContext()  
   const logOut = () => {
     signOut(auth)
     .then(() => {
         dispatch({ type: 'SIGNOUT'})
-        navigate('/')
+        router.push('/')
     })
     .catch((err) => {
         alert('Log out was unsuccessful please try again.')

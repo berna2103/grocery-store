@@ -4,14 +4,12 @@
     letter-spacing: .1rem;
   }
   .topbaritem:hover {
-    color: white !important;
-    background-color: red;
-    border-radius: 5px;
-    padding: 5px;
+    text-decoration: underline;
   }
   .active {
     background-color: black;
     color: aliceblue !important;
+    text-decoration:underline !important;
     margin: 1rem;
   }
   .form-control {
@@ -31,6 +29,7 @@
   .nav-item:hover{
     background-color: black;
     color: white;
+    text-decoration: underline;
   }
 
   @media screen and (max-width:760px){

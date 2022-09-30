@@ -15,7 +15,7 @@ export const useLogIn = () => {
     }).then(() => {
       auth.currentUser.getIdToken(true)
       auth.currentUser.getIdTokenResult().then((result) => {
-        dispatch({ type: 'AUTH_ROLE', payload: result.claims.stripeRole })
+        dispatch({ type: 'AUTH_ROLE', payload: result })
       })
     })
     .catch((err) => {

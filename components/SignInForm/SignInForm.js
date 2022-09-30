@@ -1,7 +1,9 @@
 import Link from "next/link"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useLogIn } from "../../hooks/useLogin"
 import { useResetPassword } from "../../hooks/useResetPassword"
+import { useRouter } from "next/router"
+import { useAuthContext } from "../../hooks/useAuthContext";
 import MyModal from "../Modal/MyModal"
 import SignUp from "../SignUp/SignUp"
 
@@ -13,6 +15,8 @@ export default function SignIn({handleModal}){
   const [password, setPassword] = useState('')
   const { error, logIn } = useLogIn()
   const { resetPassword } = useResetPassword()
+  const {user} = useAuthContext()
+  const router = useRouter();
   
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -22,6 +26,13 @@ export default function SignIn({handleModal}){
     e.preventDefault()
     resetPassword(email)
   }
+
+  useEffect(() => {
+    if(user){
+        handleModal(false)
+        router.push('/my-account')
+    }
+  },[user])
 
   const handleSignInModal = () => {
     setModalShow(false)
@@ -71,7 +82,7 @@ export default function SignIn({handleModal}){
           <p>Not registered yet, please 
             <a className='link-danger' onClick={() => setModalShow(true)} href='#'>Sign Up</a>
           </p>
-          <p className="mb-3 text-muted">{error && <p>{error}</p>}</p>
+          <p className="mb-3 text-muted">{<p>{error}</p>}</p>
           <a href='#' className="link-danger" onClick={handlePasswordReset}>Reset Password</a> 
         </form>
       </div>

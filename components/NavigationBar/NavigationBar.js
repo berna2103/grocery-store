@@ -4,17 +4,23 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import MyModal from "../Modal/MyModal";
 import SignInForm from "../SignInForm/SignInForm";
-import ProductCard from "../ProductCard/ProductCard";
 import SignUp from "../SignUp/SignUp";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import { useLogOut } from "../../hooks/useLogOut";
 
 export default function NavigationBar() {
   const router = useRouter();
 
   const [modalShowSignIn, setModalShowSignIn] = useState(false);
   const [modalShowSignUp, setModalShowSignUp] = useState(false);
+  const { user } = useAuthContext();
+  const { logOut } = useLogOut();
 
   const handleModal = () => {
     setModalShowSignIn(false);
+  };
+  const handleSignUpModal = () => {
+    setModalShowSignUp(false);
   };
 
   return (
@@ -180,24 +186,46 @@ export default function NavigationBar() {
                   ></i>
                 </a>
                 <div
-                  className="dropdown-menu"
+                  className="dropdown-menu text-center"
                   aria-labelledby="navbarDropdownMenuLink"
                 >
-                  <a
-                    className="dropdown-item text-uppercase text-muted"
-                    href="#"
-                    onClick={() => setModalShowSignIn(true)}
-                  >
-                    Sign In
-                  </a>
-                  <a className="dropdown-item text-uppercase text-muted"
-                   href="#"
-                   onClick={() => setModalShowSignUp(true)}>
-                    Sign Up
-                  </a>
-                  <a className="dropdown-item text-uppercase text-muted" href="#">
-                    Log Out
-                  </a>
+                  {!user ? (
+                    <>
+                      {" "}
+                      <a
+                        className="btn btn-sm btn-danger col-10 m-1"
+                        href="#"
+                        onClick={() => setModalShowSignIn(true)}
+                      >
+                        Sign In
+                      </a>
+                      <a
+                        className="btn btn-sm btn-outline-danger col-10 m-1"
+                        href="#"
+                        onClick={() => setModalShowSignUp(true)}
+                      >
+                        Create Account
+                      </a>
+                    </>
+                  ) : (
+                    <>
+                    <Link href={'my-account'}>
+                      <a
+                        className="col-10 m-1 mt-2"
+                      >
+                        My Account
+                      </a>
+                    </Link>
+                    
+                      <a
+                        className="btn btn-sm btn-outline-danger col-10 m-1 mt-3"
+                        onClick={logOut}
+                        href="#"
+                      >
+                        Log Out
+                      </a>
+                    </>
+                  )}
                 </div>
               </li>
               {/* <li className="nav-item">
@@ -217,7 +245,7 @@ export default function NavigationBar() {
       </MyModal>
 
       <MyModal show={modalShowSignUp} onHide={() => setModalShowSignUp(false)}>
-        <SignUp handleModal={handleModal} />
+        <SignUp handleModal={handleSignUpModal} />
       </MyModal>
     </>
   );
