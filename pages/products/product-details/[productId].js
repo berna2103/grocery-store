@@ -9,12 +9,13 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import AddToCartButton from "../../../components/AddToCartButton/AddToCartButton";
 
 export default function ProductDetails(props) {
   const productData = props.product;
 
   if (!productData) {
-    return <p>No product details found. Please select a different product.</p>;
+    return <p>{console.log(productData)}</p>;
   }
   return (
     <div className={`container`}>
@@ -65,10 +66,7 @@ export default function ProductDetails(props) {
           ) : (
             <p className={`text-danger`}>${productData.price} / each.</p>
           )}
-
-          <button className={`btn btn-danger rounded-pill`}>
-            Sign in to add
-          </button>
+          <AddToCartButton id={props.id} product={productData}/>
         </div>
       </div>
       <nav>
@@ -194,6 +192,7 @@ export async function getStaticProps(context) {
   return {
     props: {
       product,
+      id: productId,
     },
 
   };

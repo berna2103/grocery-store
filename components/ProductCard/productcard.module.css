@@ -21,13 +21,7 @@
     color: white;
 }
 
-.button:before {
-    content: 'Sign In to Add';
-}
 
-.buttonLoggedIn:before {
-    content: 'Add to Cart'
-}
 
 @media screen and (max-width: 600px) {
     .cardCustom{

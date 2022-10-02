@@ -44,6 +44,8 @@ export default function Document() {
       </Head>
       <body>
         <Main />
+
+        <div id="overlays"></div>
         <NextScript />
       </body>
     </Html>

@@ -1,0 +1,19 @@
+.button:before {
+    content: 'Sign In to Add';
+}
+
+.buttonLoggedIn:before {
+    content: 'Add to Cart'
+}
+
+@media screen and (max-width: 600px) {
+
+    .button:before {
+        content: "\F242";
+        font-family: 'Bootstrap-icons';
+    }
+    .buttonLoggedIn:before {
+        content: "\F242";
+        font-family: 'Bootstrap-icons';
+    }
+  }

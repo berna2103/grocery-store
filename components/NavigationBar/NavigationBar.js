@@ -7,8 +7,9 @@ import SignInForm from "../SignInForm/SignInForm";
 import SignUp from "../SignUp/SignUp";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useLogOut } from "../../hooks/useLogOut";
+import NavCartIcon from './NavCartIcon'
 
-export default function NavigationBar() {
+export default function NavigationBar(props) {
   const router = useRouter();
 
   const [modalShowSignIn, setModalShowSignIn] = useState(false);
@@ -114,7 +115,7 @@ export default function NavigationBar() {
                 <a
                   className={`${
                     router.pathname == "/offers" ? "active" : ""
-                  } nav-link mx-2 text-uppercase`}
+                  } nav-link mx-2`}
                   aria-current="page"
                   href="/offers"
                 >
@@ -125,7 +126,7 @@ export default function NavigationBar() {
                 <a
                   className={`${
                     router.pathname == "/popular" ? "active" : ""
-                  } nav-link mx-2 text-uppercase`}
+                  } nav-link mx-2`}
                   aria-current="page"
                   href="/popular"
                 >
@@ -136,7 +137,7 @@ export default function NavigationBar() {
                 <a
                   className={`${
                     router.pathname == "/categories" ? "active" : ""
-                  } nav-link mx-2 text-uppercase`}
+                  } nav-link mx-2`}
                   aria-current="page"
                   // href="/categories"
                 >
@@ -147,7 +148,7 @@ export default function NavigationBar() {
                 <a
                   className={`${
                     router.pathname == "/services" ? "active" : ""
-                  } nav-link mx-2 text-uppercase`}
+                  } nav-link mx-2`}
                   aria-current="page"
                   href="/services"
                 >
@@ -158,20 +159,13 @@ export default function NavigationBar() {
                 <a
                   className={`${
                     router.pathname == "/about" ? "active" : ""
-                  } nav-link mx-2 text-uppercase`}
+                  } nav-link mx-2`}
                   aria-current="page"
                   href="/about"
                 >
                   About
                 </a>
               </Link>
-            </ul>
-            <ul className="navbar-nav ms-auto ">
-              <li className="nav-item">
-                <a className="nav-link mx-2" href="/cart">
-                  <i className={`${styles.bi} bi-cart text-muted me-1`}></i>
-                </a>
-              </li>
               <li className="nav-item dropdown">
                 <a
                   className="nav-link dropdown-toggle"
@@ -228,8 +222,18 @@ export default function NavigationBar() {
                   )}
                 </div>
               </li>
+            </ul>
+            <ul className="navbar-nav ms-auto ">
+              
+              <li className="nav-item">
+                {/* <a className="nav-link mx-2" href="/cart">
+                  <i className={`${styles.bi} bi-cart text-muted me-1`}></i>
+                </a> */}
+                <NavCartIcon onClick={props.onShowCart} />
+              </li>
+             
               {/* <li className="nav-item">
-                <a className="nav-link mx-2 text-uppercase" href="#">
+                <a className="nav-link mx-2" href="#">
                   <i
                     onClick={() => setModalShow(true)}
                     className={`${styles.bi} bi-person-circle text-muted me-1`}

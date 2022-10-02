@@ -40,6 +40,8 @@ export async function getStaticProps() {
     return obj.fields.isPopular === true;
   });
 
+  console.log(popularProducts)
+
   return {
     props: { popularProducts: popularProducts },
   };

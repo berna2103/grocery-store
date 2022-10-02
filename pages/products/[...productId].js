@@ -40,11 +40,11 @@ export async function getStaticProps(context) {
 
   const { productId } = context.params;
 
-  const products = await getContentfulItem(productId[1]);
+  const product = await getContentfulItem(productId[1]);
 
   return {
     props: {
-      products: products,
+      products: product,
       title: productId[0]
     },
     revalidate:1
