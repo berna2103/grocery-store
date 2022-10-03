@@ -2,6 +2,7 @@ import React from "react";
 import SignIn from "../../components/SignInForm/SignInForm";
 import styles from "./account.module.css";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { Button, Form } from "react-bootstrap";
 
 export default function MyAccount() {
   const { user } = useAuthContext();
@@ -12,13 +13,30 @@ export default function MyAccount() {
           <SignIn />
         </div>
       ) : (
-        <>
+        <div className={`container mt-5`}>
           <h1 className={`lead`}>Welcome back {user.email}!</h1>
-          <form>
-            <input placeholder="name" />
-            <input placeholder="phone" />
-          </form>
-        </>
+          <div className={`w-50`}>
+          <Form>
+            <Form.Group className="mb-3" controlId="text">
+              <Form.Control type="email" placeholder="Name" />
+              <Form.Text className="text-muted">
+                We'll never share your email with anyone else.
+              </Form.Text>
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="phone">
+              <Form.Control type="email" placeholder="Phone" />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Control type="password" placeholder="Password" />
+            </Form.Group>
+            <Button variant="danger" type="submit">
+              Submit
+            </Button>
+          </Form>
+          </div>
+        </div>
       )}
     </div>
   );

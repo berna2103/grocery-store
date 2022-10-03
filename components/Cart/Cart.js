@@ -42,7 +42,8 @@ const Cart = (props) => {
   return (
     <Modal onClose={props.onClose}>
       {cartItems}
-      <div className={classes.total}>
+      <div  className={`bg-light p-3 m-0`}>
+      <div className={`${classes.total}`}>
         <span>Total Amount</span>
         <span>{totalAmount}</span>
       </div>
@@ -51,6 +52,7 @@ const Cart = (props) => {
           Close
         </button>
         {hasItems && <button className={classes.button}>Order</button>}
+      </div>
       </div>
     </Modal>
   );
