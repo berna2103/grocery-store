@@ -15,7 +15,7 @@ export default function MyAccount() {
       ) : (
         <div className={`container mt-5`}>
           <h1 className={`lead`}>Welcome back {user.email}!</h1>
-          <div className={`w-50`}>
+          <div className={`w-50n`}>
           <Form>
             <Form.Group className="mb-3" controlId="text">
               <Form.Control type="email" placeholder="Name" />
