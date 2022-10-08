@@ -7,7 +7,7 @@ import SignInForm from "../SignInForm/SignInForm";
 import SignUp from "../SignUp/SignUp";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useLogOut } from "../../hooks/useLogOut";
-import NavCartIcon from './NavCartIcon'
+import NavCartIcon from "./NavCartIcon";
 
 export default function NavigationBar(props) {
   const router = useRouter();
@@ -56,7 +56,7 @@ export default function NavigationBar(props) {
                   className={`${styles.bi} bi-briefcase
                        text-muted me-1`}
                 ></i>
-                <a className="text-muted" href="/policy">
+                <a className="text-muted" href="/careers">
                   Careers
                 </a>
               </span>
@@ -64,7 +64,7 @@ export default function NavigationBar(props) {
           </div>
         </div>
       </div>
-      <nav className="navbar navbar-expand-lg bg-white sticky-top navbar-light p-2 border-bottom">
+      <nav className="navbar navbar-expand-md bg-white sticky-top navbar-light p-2 border-bottom">
         <div className="container">
           <a className="navbar-brand" href="/">
             <img
@@ -73,8 +73,9 @@ export default function NavigationBar(props) {
               alt="logo"
             />
           </a>
+
           <button
-            className="navbar-toggler"
+            className="navbar-toggler ms-auto"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarNavDropdown"
@@ -85,7 +86,7 @@ export default function NavigationBar(props) {
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          <div className="mx-auto my-3 d-lg-none d-sm-block d-xs-block">
+          {/* <div className="mx-auto my-3 d-lg-none d-sm-block d-xs-block">
             <div className="input-group">
               <input
                 type="text"
@@ -96,7 +97,8 @@ export default function NavigationBar(props) {
                 <i className="bi bi-search"></i>
               </button>
             </div>
-          </div>
+          </div> */}
+
           <div className="collapse navbar-collapse" id="navbarNavDropdown">
             <div className="ms-auto d-none d-lg-block">
               <div className="input-group">
@@ -110,6 +112,7 @@ export default function NavigationBar(props) {
                 </button>
               </div>
             </div>
+
             <ul className="navbar-nav ms-auto ">
               <Link href="/offers" className="nav-item">
                 <a
@@ -122,6 +125,7 @@ export default function NavigationBar(props) {
                   Offers
                 </a>
               </Link>
+
               <Link href="/popular" className="nav-item">
                 <a
                   className={`${
@@ -203,14 +207,10 @@ export default function NavigationBar(props) {
                     </>
                   ) : (
                     <>
-                    <Link href={'my-account'}>
-                      <a
-                        className="col-10 m-1 mt-2"
-                      >
-                        My Account
-                      </a>
-                    </Link>
-                    
+                      <Link href={"my-account"}>
+                        <a className="col-10 m-1 mt-2">My Account</a>
+                      </Link>
+
                       <a
                         className="btn btn-sm btn-outline-danger col-10 m-1 mt-3"
                         onClick={logOut}
@@ -223,27 +223,33 @@ export default function NavigationBar(props) {
                 </div>
               </li>
             </ul>
-            <ul className="navbar-nav ms-auto ">
+            {/* <ul className="navbar-nav ms-auto ">
               
               <li className="nav-item">
-                {/* <a className="nav-link mx-2" href="/cart">
-                  <i className={`${styles.bi} bi-cart text-muted me-1`}></i>
-                </a> */}
                 <NavCartIcon onClick={props.onShowCart} />
               </li>
-             
-              {/* <li className="nav-item">
-                <a className="nav-link mx-2" href="#">
-                  <i
-                    onClick={() => setModalShow(true)}
-                    className={`${styles.bi} bi-person-circle text-muted me-1`}
-                  ></i>
-                </a>
-              </li> */}
-            </ul>
+
+            </ul> */}
+          </div>
+          <div className={`ms-2`}>
+            <NavCartIcon onClick={props.onShowCart} />
           </div>
         </div>
       </nav>
+
+      <div className="mx-auto ps-4  pe-4 my-3 d-lg-none d-m-none d-sm-block d-xs-block">
+        <div className="input-group">
+          <input
+            type="text"
+            placeholder="Find product"
+            className="form-control border-danger"
+          />
+          <button className="btn btn-danger text-white">
+            <i className="bi bi-search"></i>
+          </button>
+        </div>
+      </div>
+
       <MyModal show={modalShowSignIn} onHide={() => setModalShowSignIn(false)}>
         <SignInForm handleModal={handleModal} />
       </MyModal>

@@ -9,13 +9,15 @@ export default async function handler(req, res) {
       items.push({
         price_data: {
           currency: "usd",
+          tax_behavior: "exclusive",
+          unit_amount: item.price * 100,
 
           product_data: {
             name: item.name,
-            //   description: item.sku,
+            description: "SKU: " + item.sku,
             images: ["https:" + item.image],
+            tax_code: 'txcd_40400005'
           },
-          unit_amount: item.price * 100,
         },
         quantity: item.amount,
       })

@@ -15,6 +15,7 @@ export default function AddToCartButton(props) {
     if (!product.fields) {
       cartCtx.addItem({
         id: id,
+        sku: product.fields.sku,
         name: product.productName,
         image: product.productImage[0].fields.file.url,
         amount: 1,
@@ -23,6 +24,7 @@ export default function AddToCartButton(props) {
     } else {
       cartCtx.addItem({
         id: id,
+        sku: product.fields.sku,
         name: product.fields.productName,
         image: product.fields.productImage[0].fields.file.url,
         amount: 1,
@@ -31,7 +33,6 @@ export default function AddToCartButton(props) {
     }
   };
 
-  // const price = `$${product.fields.price}`
   return (
     <>
       {!user ? (

@@ -49,7 +49,7 @@ const Cart = (props) => {
         "Content-Type": 'application/json'
       }
     });
-    console.log(checkoutSession.data.session.id)
+   
     const result = await stripe.redirectToCheckout({
       sessionId: checkoutSession.data.session.id,
     } );

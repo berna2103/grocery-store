@@ -15,9 +15,6 @@ export default function MyModal({show, onHide, children}) {
       <Modal.Body>
         {children}
       </Modal.Body>
-      {/* <Modal.Footer>
-        <Button onClick={onHide}>Close</Button>
-      </Modal.Footer> */}
     </Modal>
   );
 }
