@@ -18,7 +18,11 @@ export const cors = Cors({
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 const checkout = async (req, res) => {
   if (req.method === "POST") {
+
+    
     const buf = await buffer(req);
+    console.log(buf)
+    console.log(sig)
     const sig = req.headers["stripe-signature"];
 
   let event;
