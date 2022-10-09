@@ -1,6 +1,27 @@
 import { buffer } from "micro";
 import Cors from 'micro-cors';
 import Stripe from "stripe";
+import { doc, setDoc } from "firebase/firestore"; 
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBJhZJpi4vQJ0aUoQ0j-T3DYLDGKN__JeQ",
+  authDomain: "grocery-store-338e5.firebaseapp.com",
+  projectId: "grocery-store-338e5",
+  storageBucket: "grocery-store-338e5.appspot.com",
+  messagingSenderId: "367701901449",
+  appId: "1:367701901449:web:6f25ff7dc6c4714dfc0658",
+  measurementId: "G-ELRQXE87MD"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+
+// Initialize Cloud Firestore and get a reference to the service
+const db = getFirestore(app);
+
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
@@ -18,13 +39,8 @@ export const cors = Cors({
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 const checkout = async (req, res) => {
   if (req.method === "POST") {
-
-    
     const buf = await buffer(req);
-
     const sig = req.headers["stripe-signature"];
-    console.log(buf)
-    console.log(sig)
 
   let event;
 
@@ -41,7 +57,6 @@ const checkout = async (req, res) => {
       const paymentIntent = event.data.object;
       // console.log(paymentIntent.charges.data)
      
-     
       break;
     case 'checkout.session.completed':
       const checkout_session = event.data.object;
@@ -51,6 +66,7 @@ const checkout = async (req, res) => {
 
     case 'customer.created':
       const customer = event.data.object;
+      await setDoc(doc(db, "customers", "zGSLcIsVhWQTo62dZ6Kw3Wbe0Jz2"), customer);
       // console.log(customer)
       // Then define and call a function to handle the event payment_intent.succeeded
       break;
@@ -73,7 +89,9 @@ const checkout = async (req, res) => {
   }
 
   // Return a 200 response to acknowledge receipt of the event
-  res.json({ received: true });
+  res.json(
+    { received: true,
+    });
 }
 }
 export default checkout;

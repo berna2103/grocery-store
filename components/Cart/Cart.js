@@ -5,6 +5,7 @@ import classes from "./Cart.module.css";
 import CartContext from "../../context/CartContext";
 import axios from "axios";
 import { loadStripe } from "@stripe/stripe-js";
+
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 );
