@@ -21,9 +21,10 @@ const checkout = async (req, res) => {
 
     
     const buf = await buffer(req);
+
+    const sig = req.headers["stripe-signature"];
     console.log(buf)
     console.log(sig)
-    const sig = req.headers["stripe-signature"];
 
   let event;
 
