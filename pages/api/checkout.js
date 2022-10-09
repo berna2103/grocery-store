@@ -11,7 +11,7 @@ export const config = {
   },
 };
 
-const cors = Cors({
+export const cors = Cors({
   allowMethods: ['POST', 'HEAD'],
 });
 
@@ -40,7 +40,7 @@ const checkout = async (req, res) => {
       break;
     case 'checkout.session.completed':
       const checkout_session = event.data.object;
-      // console.log(checkout_session)
+      console.log(checkout_session)
       // Then define and call a function to handle the event payment_intent.succeeded
       break;
 
