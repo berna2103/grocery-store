@@ -31,7 +31,7 @@ const checkout = async (req, res) => {
       const paymentIntent = event.data.object;
       // console.log(paymentIntent.charges.data)
      
-      // Then define and call a function to handle the event payment_intent.succeeded
+     
       break;
     case 'checkout.session.completed':
       const checkout_session = event.data.object;
