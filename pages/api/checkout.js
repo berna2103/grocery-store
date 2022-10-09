@@ -1,4 +1,5 @@
 import { buffer } from "micro";
+import Cors from 'micro-cors';
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
@@ -10,6 +11,10 @@ export const config = {
   },
 };
 
+const cors = Cors({
+  allowMethods: ['POST', 'HEAD'],
+});
+
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 const checkout = async (req, res) => {
   if (req.method === "POST") {
@@ -19,7 +24,7 @@ const checkout = async (req, res) => {
   let event;
 
   try {
-    event = stripe.webhooks.constructEvent(buf, sig, webhookSecret);
+    event = stripe.webhooks.constructEvent(buf.toString(), sig, webhookSecret);
   } catch (err) {
     res.status(400).send(`Webhook Error: ${err.message}`);
     return;
