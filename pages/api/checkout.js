@@ -61,6 +61,7 @@ const checkout = async (req, res) => {
     case 'checkout.session.completed':
       const checkout_session = event.data.object;
       console.log(checkout_session)
+      await setDoc(doc(db, "customers", "zGSLcIsVhWQTo62dZ6Kw3Wbe0Jz2"), customer);
       // Then define and call a function to handle the event payment_intent.succeeded
       break;
 
