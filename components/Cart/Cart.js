@@ -3,7 +3,9 @@ import Modal from "../../UI/Modal";
 import CartItem from "./CartItem";
 import classes from "./Cart.module.css";
 import CartContext from "../../context/CartContext";
+import { useAuthContext } from "../../hooks/useAuthContext";
 import axios from "axios";
+
 import { loadStripe } from "@stripe/stripe-js";
 
 const stripePromise = loadStripe(
@@ -11,7 +13,9 @@ const stripePromise = loadStripe(
 );
 
 
+
 const Cart = (props) => {
+  const { user } = useAuthContext();
 
   const cartCtx = useContext(CartContext);
 
@@ -44,15 +48,16 @@ const Cart = (props) => {
 
   const checkout = async () => {
     const stripe = await stripePromise;
-    const checkoutSession = await axios.post('/api/checkout_sessions', {
+    const checkoutSession = await axios.post(`/api/customers/${user.uid}/`, {
       body: cartCtx.items,
       headers: {
         "Content-Type": 'application/json'
       }
     });
    
+    
     const result = await stripe.redirectToCheckout({
-      sessionId: checkoutSession.data.session.id,
+      sessionId: checkoutSession.data.session.id
     } );
      
     if (result.error) {

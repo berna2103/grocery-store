@@ -1,4 +1,4 @@
-import { doc, setDoc } from "firebase/firestore"; 
+import { doc, setDoc, collection } from "firebase/firestore"; 
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
@@ -13,13 +13,24 @@ const firebaseConfig = {
   measurementId: "G-ELRQXE87MD"
 };
 
-export default async function handler(req, res) {
-  const { slug } = req.query
-  console.log(slug)
-  if (req.method === "POST") {
-    const data = req.body.body;
-    const items = [];
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 
+
+// Initialize Cloud Firestore and get a reference to the service
+const db = getFirestore(app);
+
+
+export default async function handler(req, res) {
+
+  const { userId } = req.query
+
+
+  if (req.method === "POST") {
+    const data = req.body.body
+    const items = [];
+    // const data = req.body.body;
+    if(data){
     data.map((item) =>
       items.push({
         price_data: {
@@ -36,12 +47,19 @@ export default async function handler(req, res) {
         },
         quantity: item.amount,
       })
-    );
+    )}
 
     const redirectURL =
       process.env.NODE_ENV === "development"
         ? "http://localhost:3000"
         : "https://grocery-store-git-main-berna2103.vercel.app";
+
+    const checkout_data = {
+        payment_method_types: ["card"],
+        line_items: items,
+        mode: "payment",
+        success_url: `${redirectURL}/success`,
+        cancel_url: `${redirectURL}/canceled`,}
 
     try {
       // Create Checkout Sessions from body params.
@@ -53,8 +71,12 @@ export default async function handler(req, res) {
         success_url: `${redirectURL}/success`,
         cancel_url: `${redirectURL}/canceled`,
       });
-      res.json({ session });
-      //   res.redirect(303, session.url);
+
+      const newSessionRef = doc(collection(db, `customers/${userId}/checkout_sessions`));
+      await setDoc(newSessionRef, session);
+
+       res.json({ session });
+       res.redirect(303, session.url);
     } catch (err) {
       res.status(err.statusCode || 500).json(err.message);
     }

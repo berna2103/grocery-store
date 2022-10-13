@@ -24,7 +24,12 @@ const db = getFirestore(app);
 
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+var webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+
+
+if(process.env.NODE_ENV === "development"){
+  webhookSecret=process.env.STRIPE_SECRET_WEBHOOK_LOCAL
+}
 
 export const config = {
   api: {
@@ -38,6 +43,7 @@ export const cors = Cors({
 
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 const checkout = async (req, res) => {
+
   if (req.method === "POST") {
     const buf = await buffer(req);
     const sig = req.headers["stripe-signature"];
@@ -61,14 +67,16 @@ const checkout = async (req, res) => {
     case 'checkout.session.completed':
       const checkout_session = event.data.object;
       console.log(checkout_session)
-      await setDoc(doc(db, "customers", "zGSLcIsVhWQTo62dZ6Kw3Wbe0Jz2"), customer);
+
+      //setDoc(doc, "users/")
+      // setDoc(doc(db, "customers", "zGSLcIsVhWQTo62dZ6Kw3Wbe0Jz2"), customer);
       // Then define and call a function to handle the event payment_intent.succeeded
       break;
 
     case 'customer.created':
       const customer = event.data.object;
-      await setDoc(doc(db, "customers", "zGSLcIsVhWQTo62dZ6Kw3Wbe0Jz2"), customer);
-      // console.log(customer)
+      
+      console.log(customer)
       // Then define and call a function to handle the event payment_intent.succeeded
       break;
 

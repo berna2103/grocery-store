@@ -5,7 +5,9 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import { Button, Form } from "react-bootstrap";
 
 export default function MyAccount() {
+  
   const { user } = useAuthContext();
+ 
   return (
     <div className={`container mt-2 ${styles.account}`}>
       {!user ? (
@@ -15,6 +17,7 @@ export default function MyAccount() {
       ) : (
         <div className={`container mt-5`}>
           <h1 className={`lead`}>Welcome back {user.email}!</h1>
+       
           <div className={`w-50n`}>
           <Form>
             <Form.Group className="mb-3" controlId="text">
@@ -41,3 +44,14 @@ export default function MyAccount() {
     </div>
   );
 }
+// export async function getServerSideProps() {
+
+//   const docRef = doc(db, 'customers', "B6ajsROZcteWw8izQhubv8fYdZ03") 
+//   const docSnap = await getDoc(docRef)
+
+//   return {
+//     props: {
+//       customer: docSnap.data(),
+//     },
+//   };
+// }
