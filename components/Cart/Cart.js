@@ -48,7 +48,7 @@ const Cart = (props) => {
 
   const checkout = async () => {
     const stripe = await stripePromise;
-    const checkoutSession = await axios.post(`/api/customers/${user.uid}/`, {
+    const checkoutSession = await axios.post(`/api/checkout`, {
       body: cartCtx.items,
       headers: {
         "Content-Type": 'application/json'
