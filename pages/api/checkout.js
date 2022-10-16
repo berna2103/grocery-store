@@ -66,10 +66,14 @@ const checkout = async (req, res) => {
 
       console.log(paymentIntent)
       // Add a new document with a generated id.
-      const docRef = await addDoc(collection(db, "orders"), {
-        paymentIntent
-      });
-      
+      // const docRef = await addDoc(collection(db, "orders"), {
+      //   paymentIntent
+      // });
+      try{
+      setDoc(doc(db, "orders", paymentIntent.id), paymentIntent)
+      }catch(err){
+        console.log(err)
+      }
      
       break;
     case 'checkout.session.completed':
@@ -77,7 +81,7 @@ const checkout = async (req, res) => {
       // console.log(checkout_session)
 
       //setDoc(doc, "users/")
-      // setDoc(doc(db, "customers", "zGSLcIsVhWQTo62dZ6Kw3Wbe0Jz2"), customer);
+      //setDoc(doc(db, "customers", "zGSLcIsVhWQTo62dZ6Kw3Wbe0Jz2"), customer);
       // Then define and call a function to handle the event payment_intent.succeeded
       break;
 
