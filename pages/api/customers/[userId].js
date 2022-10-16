@@ -16,70 +16,26 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
 
 
 export default async function handler(req, res) {
 
-  const { userId } = req.query
-
+    const data = req.body.body
+    const { userId } = req.query
+  
 
   if (req.method === "POST") {
-    const data = req.body.body
-    const items = [];
-    // const data = req.body.body;
-    if(data){
-    data.map((item) =>
-      items.push({
-        price_data: {
-          currency: "usd",
-          tax_behavior: "exclusive",
-          unit_amount: item.price * 100,
 
-          product_data: {
-            name: item.name,
-            description: "SKU: " + item.sku,
-            images: ["https:" + item.image],
-            tax_code: 'txcd_40400005'
-          },
-        },
-        quantity: item.amount,
-      })
-    )}
+      try {
+        const newSessionRef = doc(collection(db, `customers/${userId}/checkout_sessions`));
+        await setDoc(newSessionRef, data);
+        return res.status(201).json({message: 'success', session: session})
+      }catch(error){
+          return res.status(501).json({message: error})
+      }
 
-    const redirectURL =
-      process.env.NODE_ENV === "development"
-        ? "http://localhost:3000"
-        : "https://grocery-store-git-main-berna2103.vercel.app";
-
-    const checkout_data = {
-        payment_method_types: ["card"],
-        line_items: items,
-        mode: "payment",
-        success_url: `${redirectURL}/success`,
-        cancel_url: `${redirectURL}/canceled`,}
-
-    try {
-      // Create Checkout Sessions from body params.
-
-      const session = await stripe.checkout.sessions.create({
-        payment_method_types: ["card"],
-        line_items: items,
-        mode: "payment",
-        success_url: `${redirectURL}/success`,
-        cancel_url: `${redirectURL}/canceled`,
-      });
-
-      const newSessionRef = doc(collection(db, `customers/${userId}/checkout_sessions`));
-      await setDoc(newSessionRef, session);
-
-       res.json({ session });
-       res.redirect(303, session.url);
-    } catch (err) {
-      res.status(err.statusCode || 500).json(err.message);
-    }
   } else {
     res.setHeader("Allow", "POST");
     res.status(405).end("Method Not Allowed");

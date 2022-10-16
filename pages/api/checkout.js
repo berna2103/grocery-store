@@ -51,8 +51,9 @@ const checkout = async (req, res) => {
   let event;
 
   try {
-    event = stripe.webhooks.constructEvent(buf, sig, webhookSecret);
+    event = stripe.webhooks.constructEvent(buf, sig, "whsec_3b4ecca8673fd32a2149b8d8df385c155964b7131d4342b4e00dd214f798bc5a");
   } catch (err) {
+    console.log(err)
     res.status(400).send(`Webhook Error: ${err.message}`);
     return;
   }

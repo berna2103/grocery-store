@@ -3,7 +3,6 @@ import Modal from "../../UI/Modal";
 import CartItem from "./CartItem";
 import classes from "./Cart.module.css";
 import CartContext from "../../context/CartContext";
-import { useAuthContext } from "../../hooks/useAuthContext";
 import axios from "axios";
 
 import { loadStripe } from "@stripe/stripe-js";
@@ -15,7 +14,7 @@ const stripePromise = loadStripe(
 
 
 const Cart = (props) => {
-  const { user } = useAuthContext();
+ 
 
   const cartCtx = useContext(CartContext);
 
@@ -55,7 +54,8 @@ const Cart = (props) => {
       }
     });
    
-    
+    const response = checkoutSession.data
+
     const result = await stripe.redirectToCheckout({
       sessionId: checkoutSession.data.session.id
     } );
