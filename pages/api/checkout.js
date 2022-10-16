@@ -1,7 +1,7 @@
 import { buffer } from "micro";
 import Cors from 'micro-cors';
 import Stripe from "stripe";
-import { doc, setDoc } from "firebase/firestore"; 
+import { doc, setDoc, collection, addDoc } from "firebase/firestore"; 
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
@@ -65,7 +65,11 @@ const checkout = async (req, res) => {
       // console.log(paymentIntent.charges.data)
 
       console.log(paymentIntent)
-      setDoc(doc(db, "orders"), paymentIntent)
+      // Add a new document with a generated id.
+      const docRef = await addDoc(collection(db, "orders"), {
+        paymentIntent
+      });
+      
      
       break;
     case 'checkout.session.completed':
