@@ -63,11 +63,14 @@ const checkout = async (req, res) => {
     case 'payment_intent.succeeded':
       const paymentIntent = event.data.object;
       // console.log(paymentIntent.charges.data)
+
+      console.log(paymentIntent)
+      setDoc(doc(db, "orders"), paymentIntent)
      
       break;
     case 'checkout.session.completed':
       const checkout_session = event.data.object;
-      console.log(checkout_session)
+      // console.log(checkout_session)
 
       //setDoc(doc, "users/")
       // setDoc(doc(db, "customers", "zGSLcIsVhWQTo62dZ6Kw3Wbe0Jz2"), customer);
@@ -77,7 +80,7 @@ const checkout = async (req, res) => {
     case 'customer.created':
       const customer = event.data.object;
       
-      console.log(customer)
+      // console.log(customer)
       // Then define and call a function to handle the event payment_intent.succeeded
       break;
 
