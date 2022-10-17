@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import styles from "./success.module.css";
 import { useRouter } from "next/router";
+import { useFirestore } from "../../hooks/useFirestore";
 import axios from "axios";
 import { useAuthContext } from "../../hooks/useAuthContext";
 const stripe = require("stripe")(
@@ -9,6 +10,8 @@ const stripe = require("stripe")(
 
 export default function Success(props) {
   const { user } = useAuthContext();
+
+  const { addDocument } = useFirestore(`customers/${user.uid}`)
 
   const session = props.session;
   const customer = props.customer;
@@ -20,28 +23,12 @@ export default function Success(props) {
   };
 
   useEffect(() => {
-    const saveSessionToFirebase = async () => {
-      if (user) {
-        const checkoutSession = await axios.post(
-          `/api/customers/${user.uid}/`,
-          {
-            body: {
-              session: session,
-              payment: payment,
-            },
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        )
-        if(checkoutSession){
-          console.log(checkoutSession.data)
-        }
-      }
-    }
 
-    saveSessionToFirebase();
-  }, []);
+    const data = { session: session, payment: payment}
+    
+    addDocument(data, session.id)
+  
+  }, [props]);
 
   return (
     <div className={`container ${styles.mainBanner}`}>
