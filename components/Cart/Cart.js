@@ -4,7 +4,7 @@ import CartItem from "./CartItem";
 import classes from "./Cart.module.css";
 import CartContext from "../../context/CartContext";
 import axios from "axios";
-
+import { useAuthContext } from "../../hooks/useAuthContext";
 import { loadStripe } from "@stripe/stripe-js";
 
 const stripePromise = loadStripe(
@@ -15,7 +15,7 @@ const stripePromise = loadStripe(
 
 const Cart = (props) => {
  
-
+  const { user } = useAuthContext()
   const cartCtx = useContext(CartContext);
 
   const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
@@ -47,7 +47,7 @@ const Cart = (props) => {
 
   const checkout = async () => {
     const stripe = await stripePromise;
-    const checkoutSession = await axios.post(`/api/checkout_sessions`, {
+    const checkoutSession = await axios.post(`/api/checkout_sessions/${user.uid}`, {
       body: cartCtx.items,
       headers: {
         "Content-Type": 'application/json'

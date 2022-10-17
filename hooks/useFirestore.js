@@ -1,7 +1,7 @@
 // Add, remove and edit firestore documents
 
 import { useReducer, useEffect, useState} from 'react'
-import { db } from '../firebaseconfig/config'
+import { db } from '../config/firebaseConfig'
 import { addDoc, doc, Timestamp, collection, deleteDoc, updateDoc, setDoc, arrayRemove } from 'firebase/firestore' 
 
 export const useFirestore = (firestoreCollection) => {

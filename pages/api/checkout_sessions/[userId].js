@@ -2,6 +2,8 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
 
+  const { userId } = req.query
+
   if (req.method === "POST") {
     const data = req.body.body;
     const items = [];
@@ -36,7 +38,7 @@ export default async function handler(req, res) {
         payment_method_types: ["card"],
         line_items: items,
         mode: "payment",
-        success_url: `${redirectURL}/success/{CHECKOUT_SESSION_ID}`,
+        success_url: `${redirectURL}/success/${userId}/{CHECKOUT_SESSION_ID}`,
         cancel_url: `${redirectURL}/canceled/{CHECKOUT_SESSION_ID}`,
       });
       res.json({ session });

@@ -15,7 +15,7 @@ export default function AddToCartButton(props) {
     if (!product.fields) {
       cartCtx.addItem({
         id: id,
-        sku: product.fields.sku,
+        sku: product.sku,
         name: product.productName,
         image: product.productImage[0].fields.file.url,
         amount: 1,

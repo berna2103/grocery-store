@@ -207,7 +207,7 @@ export default function NavigationBar(props) {
                     </>
                   ) : (
                     <>
-                      <Link href={"my-account"}>
+                      <Link href={"/my-account"}>
                         <a className="col-10 m-1 mt-2">My Account</a>
                       </Link>
 
