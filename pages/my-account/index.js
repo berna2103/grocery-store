@@ -1,4 +1,6 @@
 import React from "react";
+import { auth } from '../../config/firebaseConfig'
+import { updateProfile } from "firebase/auth";
 import SignIn from "../../components/SignInForm/SignInForm";
 import styles from "./account.module.css";
 import { useAuthContext } from "../../hooks/useAuthContext";
@@ -15,6 +17,21 @@ export default function MyAccount() {
   const { documents: MyOrders } = useCollection(
     `customers/${user.uid}/checkout_sessions`
   );
+
+  const updateMyProfile = () => {
+    updateProfile(auth.currentUser, {
+      displayName: "Bernardo"
+    }).then(() => {
+      // Profile updated!
+      alert('Profile updated successfully!')
+      // ...
+    }).catch((error) => {
+      // An error occurred
+      // ...
+      
+    });
+    
+  }
 
   return (
     <div className={`container mt-2 ${styles.account}`}>
@@ -52,12 +69,13 @@ export default function MyAccount() {
           <hr></hr>
           <div className={`w-50n`}>
           <p className={`lead`}>My Profile</p>
-          <h1 className={`lead text-muted`}>Welcome back {user.email}!</h1>
-            <Form>
+          {!user.displayName ? <h1 className={`lead text-muted`}>Welcome back {user.email}!</h1> :
+          <h1 className={`lead text-muted`}>Welcome back {user.displayName}!</h1>}
+            <Form onSubmit={updateMyProfile}>
               <Form.Group className="mb-3" controlId="text">
                 <Form.Control type="email" placeholder="Name" />
                 <Form.Text className="text-muted">
-                  We'll never share your email with anyone else.
+                  Please update your name!
                 </Form.Text>
               </Form.Group>
 
@@ -78,14 +96,3 @@ export default function MyAccount() {
     </div>
   );
 }
-// export async function getServerSideProps() {
-
-//   const docRef = doc(db, 'customers', "B6ajsROZcteWw8izQhubv8fYdZ03")
-//   const docSnap = await getDoc(docRef)
-
-//   return {
-//     props: {
-//       customer: docSnap.data(),
-//     },
-//   };
-// }
