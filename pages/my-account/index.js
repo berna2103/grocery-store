@@ -73,7 +73,7 @@ export default function MyAccount() {
           <h1 className={`lead text-muted`}>Welcome back {user.displayName}!</h1>}
             <Form onSubmit={updateMyProfile}>
               <Form.Group className="mb-3" controlId="text">
-                <Form.Control type="email" placeholder="Name" />
+                <Form.Control type="text" placeholder="Name" />
                 <Form.Text className="text-muted">
                   Please update your name!
                 </Form.Text>
