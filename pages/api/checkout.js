@@ -70,7 +70,7 @@ const checkout = async (req, res) => {
       //   paymentIntent
       // });
       try{
-      setDoc(doc(db, "orders", paymentIntent.id), paymentIntent)
+      await setDoc(doc(db, "orders", paymentIntent.id), paymentIntent)
       }catch(err){
         console.log(err)
       }
