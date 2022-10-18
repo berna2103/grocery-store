@@ -86,19 +86,6 @@ export default function NavigationBar(props) {
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          {/* <div className="mx-auto my-3 d-lg-none d-sm-block d-xs-block">
-            <div className="input-group">
-              <input
-                type="text"
-                placeholder="Find product"
-                className="form-control border-danger"
-              />
-              <button className="btn btn-danger text-white">
-                <i className="bi bi-search"></i>
-              </button>
-            </div>
-          </div> */}
-
           <div className="collapse navbar-collapse" id="navbarNavDropdown">
             <div className="ms-auto d-none d-lg-block">
               <div className="input-group">
@@ -114,13 +101,14 @@ export default function NavigationBar(props) {
             </div>
 
             <ul className="navbar-nav ms-auto ">
-              <Link href="/offers" className="nav-item">
+              <Link href="/offers" className="nav-item" >
                 <a
                   className={`${
                     router.pathname == "/offers" ? "active" : ""
                   } nav-link mx-2`}
                   aria-current="page"
                   href="/offers"
+                  
                 >
                   Offers
                 </a>
@@ -133,6 +121,7 @@ export default function NavigationBar(props) {
                   } nav-link mx-2`}
                   aria-current="page"
                   href="/popular"
+              
                 >
                   Popular
                 </a>
@@ -148,13 +137,13 @@ export default function NavigationBar(props) {
                   Categories
                 </a>
               </Link>
-              <Link href="/services" className="nav-item">
+              <Link href="/services" className="nav-item" >
                 <a
                   className={`${
                     router.pathname == "/services" ? "active" : ""
                   } nav-link mx-2`}
                   aria-current="page"
-                  href="/services"
+               
                 >
                   Services
                 </a>
@@ -191,6 +180,7 @@ export default function NavigationBar(props) {
                     <>
                       {" "}
                       <a
+                        data-bs-toggle="collapse"
                         className="btn btn-sm btn-danger col-10 m-1"
                         href="#"
                         onClick={() => setModalShowSignIn(true)}
@@ -207,10 +197,10 @@ export default function NavigationBar(props) {
                     </>
                   ) : (
                     <>
-                      <Link href={"/my-account"}>
+                      <p className={`fw-bold`}>Account</p>
+                      {!user.displayName ? <Link href={"/my-account"}>
                         <a className="col-10 m-1 mt-2">My Account</a>
-                      </Link>
-
+                      </Link> : <Link href={"/my-account"}><a >{user.displayName}</a></Link>}
                       <a
                         className="btn btn-sm btn-outline-danger col-10 m-1 mt-3"
                         onClick={logOut}
@@ -223,13 +213,6 @@ export default function NavigationBar(props) {
                 </div>
               </li>
             </ul>
-            {/* <ul className="navbar-nav ms-auto ">
-              
-              <li className="nav-item">
-                <NavCartIcon onClick={props.onShowCart} />
-              </li>
-
-            </ul> */}
           </div>
           <div className={`ms-2`}>
             <NavCartIcon onClick={props.onShowCart} />
