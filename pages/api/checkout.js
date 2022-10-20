@@ -81,7 +81,7 @@ const checkout = async (req, res) => {
       case "checkout.session.completed":
         const checkout_session = event.data.object;
         // console.log(checkout_session)
-        createOrder(checkout_session.id)
+        await createOrder(checkout_session.id)
 
         break;
 

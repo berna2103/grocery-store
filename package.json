@@ -19,7 +19,6 @@
     "cookie": "^0.5.0",
     "firebase": "^9.10.0",
     "firebase-admin": "^11.0.1",
-    "firebase-functions": "^3.24.1",
     "micro": "^9.4.1",
     "micro-cors": "^0.1.1",
     "next": "^12.3.1",
