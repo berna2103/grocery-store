@@ -11,7 +11,6 @@ export default function Dropdown(props) {
       setLatitude(position.coords.latitude);
       setLongitud(position.coords.longitude);
     });
-    console.log(`lat: ${latitude}, long: ${longitud}`)
   };
 
   return (

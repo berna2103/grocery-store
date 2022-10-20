@@ -15,7 +15,6 @@ export default function useSinglePost(slug) {
       setItem(result[0].fields)
       setLoading(false)}
     })
-    console.log(item)
   }, [])
 
   return [item, isLoading]

@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./cancelled.module.css";
 const stripe = require("stripe")(
-  "sk_test_51KJmVLBt569SUtL1aCf4ovxKrOfwRjEM7Dbl0rDv75JHugaP4BFSr9tBMVlNMPQyvlISLP4bQN1MNVySGE9af79y00EWLzOZEV"
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 );
 
 export default function Cancelled(props) {

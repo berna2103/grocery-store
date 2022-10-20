@@ -58,7 +58,6 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-  //  const entries = await getContentfulItems("diet");
 
   return { paths: [], fallback: "blocking" };
 }

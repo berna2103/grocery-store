@@ -5,6 +5,7 @@ import { doc, setDoc, collection, addDoc } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
+
 const firebaseConfig = {
   apiKey: "AIzaSyBJhZJpi4vQJ0aUoQ0j-T3DYLDGKN__JeQ",
   authDomain: "grocery-store-338e5.firebaseapp.com",
@@ -38,6 +39,23 @@ export const cors = Cors({
   allowMethods: ["POST", "HEAD"],
 });
 
+const createOrder = async (sessionId) => {
+  // TODO: fill me in
+  
+  const checkout_session = await stripe.checkout.sessions.retrieve(sessionId, {
+    expand: ['line_items', 'customer']
+  })
+
+  const data = { session: checkout_session, active: true}
+
+  try {
+    await setDoc(doc(db, "orders", checkout_session.id), data);
+    console.log(`Order Created: ${checkout_session.id}`)
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 const checkout = async (req, res) => {
   if (req.method === "POST") {
@@ -59,20 +77,12 @@ const checkout = async (req, res) => {
       case "payment_intent.succeeded":
         const paymentIntent = event.data.object;
 
-        try {
-          await setDoc(doc(db, "orders", paymentIntent.id), paymentIntent);
-        } catch (err) {
-          console.log(err);
-        }
-
         break;
       case "checkout.session.completed":
         const checkout_session = event.data.object;
         // console.log(checkout_session)
+        createOrder(checkout_session.id)
 
-        //setDoc(doc, "users/")
-        //setDoc(doc(db, "customers", "zGSLcIsVhWQTo62dZ6Kw3Wbe0Jz2"), customer);
-        // Then define and call a function to handle the event payment_intent.succeeded
         break;
 
       case "customer.created":

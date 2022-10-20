@@ -11,11 +11,8 @@ const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 );
 
-
-
 const Cart = (props) => {
- 
-  const { user } = useAuthContext()
+  const { user } = useAuthContext();
   const cartCtx = useContext(CartContext);
 
   const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
@@ -27,6 +24,8 @@ const Cart = (props) => {
 
   const cartItemAddHandler = (item) => {
     cartCtx.addItem({ ...item, amount: 1 });
+
+    setCookie(cartCtx);
   };
 
   const cartItems = (
@@ -47,19 +46,22 @@ const Cart = (props) => {
 
   const checkout = async () => {
     const stripe = await stripePromise;
-    const checkoutSession = await axios.post(`/api/checkout_sessions/${user.uid}`, {
-      body: cartCtx.items,
-      headers: {
-        "Content-Type": 'application/json'
+    const checkoutSession = await axios.post(
+      `/api/checkout_sessions/${user.uid}`,
+      {
+        body: cartCtx.items,
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    });
-   
-    const response = checkoutSession.data
+    );
+
+    const response = checkoutSession.data;
 
     const result = await stripe.redirectToCheckout({
-      sessionId: checkoutSession.data.session.id
-    } );
-     
+      sessionId: checkoutSession.data.session.id,
+    });
+
     if (result.error) {
       alert(result.error.message);
     }

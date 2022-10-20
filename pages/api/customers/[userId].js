@@ -30,7 +30,7 @@ export default async function handler(req, res) {
 
       try {
         const newSessionRef = doc(collection(db, `customers/${userId}/checkout_sessions`));
-        await setDoc(newSessionRef, data);
+        // await setDoc(newSessionRef, data);
         return res.status(201).json({message: 'success', session: session})
       }catch(error){
           return res.status(501).json({message: error})

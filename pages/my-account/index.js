@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { auth } from "../../config/firebaseConfig";
 import { updateProfile } from "firebase/auth";
 import styles from "./account.module.css";
@@ -7,6 +7,8 @@ import { Button, Form } from "react-bootstrap";
 import { useCollection } from "../../hooks/useCollection";
 import Loading from "../../components/Loading/Loaading";
 import Link from "next/link";
+const Stripe = require("stripe");
+const stripe = Stripe( process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
 export default function MyAccount() {
   const { user } = useAuthContext();
@@ -19,7 +21,6 @@ export default function MyAccount() {
   );
 
   const updateMyProfile = () => {
-
     updateProfile(auth.currentUser, {
       displayName: "Maximiliano",
     })
@@ -67,8 +68,10 @@ export default function MyAccount() {
                     >
                       <i className="bi bi-file-earmark-text text-danger me-2"></i>
                       {order.payment.charges.data[0].created}
-                    </a>  {console.log(order)}
-                    <p className="text-center mt-2 text-muted">
+                    </a>
+                    {!order.session.line_items ? <></> : <p className="text-center text-muted">{`Items: ${order.session.line_items.data.length}`}</p>}
+                   
+                    <p className="text-center text-muted">
                       Amount total: ${order.session.amount_total / 100}
                     </p>
                   </div>
@@ -111,3 +114,5 @@ export default function MyAccount() {
     </div>
   );
 }
+
+

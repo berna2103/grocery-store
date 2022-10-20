@@ -93,6 +93,7 @@ export default function Home(props) {
 }
 
 export async function getStaticProps() {
+  
   const diet = await getContentfulItems("diet");
   const entries = await getContentfulItems("corporation");
   const specialEvents = await getContentfulItems("specialEvents");
@@ -117,3 +118,4 @@ export async function getStaticProps() {
     },
   };
 }
+

@@ -3,9 +3,7 @@ import styles from "./success.module.css";
 import { useRouter } from "next/router";
 import { useFirestore } from "../../hooks/useFirestore";
 import Loading from '../../components/Loading/Loaading'
-const stripe = require("stripe")(
-  "sk_test_51KJmVLBt569SUtL1aCf4ovxKrOfwRjEM7Dbl0rDv75JHugaP4BFSr9tBMVlNMPQyvlISLP4bQN1MNVySGE9af79y00EWLzOZEV"
-);
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
 
 export default function Success(props) {
   const session = props.session;
@@ -58,7 +56,9 @@ export default function Success(props) {
 
 export async function getStaticProps(context) {
   const { sessionId } = context.params;
-  const session = await stripe.checkout.sessions.retrieve(sessionId[1]);
+  const session = await stripe.checkout.sessions.retrieve(sessionId[1], {
+    expand: ['line_items']
+  });
   const customer = await stripe.customers.retrieve(session.customer);
   const payment = await stripe.paymentIntents.retrieve(session.payment_intent);
 

@@ -25,7 +25,7 @@ export const useGetDocument = (collection, docID) => {
       }) 
 
       }catch(err){
-          console.log(err)
+        
           setIsPending(false)
           setError(err)
         }

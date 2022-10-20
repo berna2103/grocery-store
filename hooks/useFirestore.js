@@ -56,7 +56,7 @@ export const useFirestore = (firestoreCollection) => {
               const addedDocument = await addDoc(ref, { ...document, createdAt})
               dispatchIfNotCancelled({ type: 'ADDED_DOCUMENT', payload: addedDocument})}
         } catch (err){
-            console.log(err)
+           
               dispatchIfNotCancelled({ type: 'ERROR', payload: err.message })
               
         }

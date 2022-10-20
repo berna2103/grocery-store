@@ -7,6 +7,8 @@ import Cart from "../components/Cart/Cart";
 import CartProvider from "../hooks/CartProvider";
 import { useState } from "react";
 
+import { CookiesProvider } from "react-cookie"
+
 function MyApp({ Component, pageProps }) {
   const [cartIsShown, setCartIsShown] = useState(false);
 
@@ -26,12 +28,14 @@ function MyApp({ Component, pageProps }) {
         crossorigin="anonymous"
       ></Script>
       <CartProvider>
+        <CookiesProvider>
         <AuthContextProvider>
           {cartIsShown && <Cart onClose={hideCartHandler} />}
           <NavigationBar onShowCart={showCartHandler}/>
           <Component {...pageProps} />
           <Footer />
         </AuthContextProvider>
+        </CookiesProvider>
       </CartProvider>
     </>
   );
