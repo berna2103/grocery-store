@@ -78,9 +78,10 @@ const checkout = async (req, res) => {
         const paymentIntent = event.data.object;
 
         break;
+        
       case "checkout.session.completed":
         const checkout_session = event.data.object;
-        // console.log(checkout_session)
+       
         await createOrder(checkout_session.id)
 
         break;
@@ -88,20 +89,16 @@ const checkout = async (req, res) => {
       case "customer.created":
         const customer = event.data.object;
 
-        // console.log(customer)
-        // Then define and call a function to handle the event payment_intent.succeeded
         break;
 
       case "charge.succeeded":
         const charge = event.data.object;
-        // console.log(charge)
-        // Then define and call a function to handle the event payment_intent.succeeded
+
         break;
 
       case "order.created":
         const order = event.data.object;
-        console.log(order);
-        // Then define and call a function to handle the event payment_intent.succeeded
+   
         break;
 
       // ... handle other event types

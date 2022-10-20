@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import { auth } from "../../config/firebaseConfig";
 import { updateProfile } from "firebase/auth";
 import styles from "./account.module.css";
@@ -6,9 +5,10 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import { Button, Form } from "react-bootstrap";
 import { useCollection } from "../../hooks/useCollection";
 import Loading from "../../components/Loading/Loaading";
+import { convertDate } from "../../functions/date";
 import Link from "next/link";
 const Stripe = require("stripe");
-const stripe = Stripe( process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
+const stripe = Stripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
 export default function MyAccount() {
   const { user } = useAuthContext();
@@ -57,23 +57,77 @@ export default function MyAccount() {
             <p>No orders found!</p>
           ) : (
             <div className={`row`}>
-              {MyOrders.map((order) => (
-                <div className={`col-lg-4 col-md-4 col-6`}>
-                  <div className={`card m-1 p-2`}>
-                    <a
-                      href={order.payment.charges.data[0].receipt_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`me-3 fs-6`}
-                    >
-                      <i className="bi bi-file-earmark-text text-danger me-2"></i>
-                      {order.payment.charges.data[0].created}
-                    </a>
-                    {!order.session.line_items ? <></> : <p className="text-center text-muted">{`Items: ${order.session.line_items.data.length}`}</p>}
-                   
-                    <p className="text-center text-muted">
-                      Amount total: ${order.session.amount_total / 100}
-                    </p>
+              {MyOrders.map((order, index) => (
+                <div className={`col-lg-12`}>
+                  <div className={`accordion`} id="accordionOrder">
+                    <div className={`accordion-item mb-2`} id={index}>
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id={index}>
+                          <button
+                            class="accordion-button"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target={`#${order.id}`}
+                            aria-expanded="true"
+                            aria-controls={order.id}
+                          >
+                            <i className="bi bi-calendar3 text-danger me-2"></i>
+                            { convertDate(order.payment.charges.data[0].created) }
+                          </button>
+                        </h2>
+                        <div
+                          id={order.id}
+                          className="accordion-collapse collapse show"
+                          aria-labelledby={index}
+                          data-bs-parent="#accordionOrder"
+                        >
+                          <div className="accordion-body">
+                            <div>
+                              <span className="text-center text-muted">
+                                <span>
+                                  {!order.session.line_items ? (
+                                    <></>
+                                  ) : (
+                                    <>
+                                      {order.session.line_items.data.map(
+                                        (item) => (
+                                          <div
+                                            className={`d-flex justify-content-between`}
+                                          >
+                                            <div>{`${item.quantity} qty`}</div>
+                                            <div>{`${item.description}`}</div>
+                                            <div>{`$${
+                                              item.amount_total / 100
+                                            }`}</div>
+                                            {console.log(order.session)}
+                                          </div>
+                                        )
+                                      )}
+                                      <hr></hr>
+                                      <div className={`text-end`}>
+                                        <p className={`lead`}>
+                                          Total:{" "}
+                                          {order.session.amount_total / 100}
+                                        </p>
+                                      </div>
+                                    </>
+                                  )}
+                                </span>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        {/* <a
+                          href={order.payment.charges.data[0].receipt_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`me-3 fs-6`}
+                        >
+                        </a> */}
+                      </div>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -114,5 +168,3 @@ export default function MyAccount() {
     </div>
   );
 }
-
-
