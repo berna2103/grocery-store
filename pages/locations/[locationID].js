@@ -1,6 +1,9 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { getContentfulItem, getContentfulItems } from "../../contentful/Contentful";
+import {
+  getContentfulItem,
+  getContentfulItems,
+} from "../../contentful/Contentful";
 import styles from "./locations.module.css";
 
 export default function Location(props) {
@@ -72,15 +75,15 @@ export async function getStaticPaths() {
   if (process.env.SKIP_BUILD_STATIC_GENERATION) {
     return {
       paths: [],
-      fallback: 'blocking',
-    }
+      fallback: "blocking",
+    };
   }
-    // Call an external API endpoint to get posts
+  // Call an external API endpoint to get posts
 
-    const entries = await getContentfulItems("location");
-    const paths = entries.map((entry) => ({
-      params: { locationID: entry.sys.id },
-    }))
+  const entries = await getContentfulItems("location");
+  const paths = entries.map((entry) => ({
+    params: { locationID: entry.sys.id },
+  }));
 
-    return { paths, fallback: false }
+  return { paths, fallback: false };
 }

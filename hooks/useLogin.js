@@ -3,6 +3,7 @@ import { auth } from '../config/firebaseConfig'
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useAuthContext } from './useAuthContext'
 
+
 export const useLogIn = () => {
 
   const [error, setError] = useState(null)

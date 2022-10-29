@@ -5,7 +5,7 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import { Button, Form } from "react-bootstrap";
 import { useCollection } from "../../hooks/useCollection";
 import Loading from "../../components/Loading/Loaading";
-import { convertDate } from "../../functions/date";
+import { convertDate } from "../../utililies/date";
 import Link from "next/link";
 const Stripe = require("stripe");
 const stripe = Stripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
@@ -31,7 +31,7 @@ export default function MyAccount() {
       })
       .catch((error) => {
         // An error occurred
-        // ...
+        console.log(error)
       });
   };
 
@@ -64,7 +64,7 @@ export default function MyAccount() {
                       <div class="accordion-item">
                         <h2 class="accordion-header" id={index}>
                           <button
-                            class="accordion-button"
+                            className="accordion-button collapsed"
                             type="button"
                             data-bs-toggle="collapse"
                             data-bs-target={`#${order.id}`}
@@ -72,12 +72,12 @@ export default function MyAccount() {
                             aria-controls={order.id}
                           >
                             <i className="bi bi-calendar3 text-danger me-2"></i>
-                            { convertDate(order.payment.charges.data[0].created) }
+                            {convertDate(order.payment.charges.data[0].created)}
                           </button>
                         </h2>
                         <div
                           id={order.id}
-                          className="accordion-collapse collapse show"
+                          className="accordion-collapse collapse"
                           aria-labelledby={index}
                           data-bs-parent="#accordionOrder"
                         >
@@ -118,15 +118,7 @@ export default function MyAccount() {
                           </div>
                         </div>
                       </div>
-                      <div>
-                        {/* <a
-                          href={order.payment.charges.data[0].receipt_url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={`me-3 fs-6`}
-                        >
-                        </a> */}
-                      </div>
+                      <div></div>
                     </div>
                   </div>
                 </div>

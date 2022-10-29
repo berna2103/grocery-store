@@ -27,6 +27,11 @@ function MyApp({ Component, pageProps }) {
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
         crossorigin="anonymous"
       ></Script>
+       
+      {/* Firebase authentication ui */}
+      <Script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js">
+      </Script>
+
       <CartProvider>
         <CookiesProvider>
         <AuthContextProvider>
