@@ -7,7 +7,7 @@ import CarouselItem from "../components/Carousels/TopDealsCarousel/CarouselItem"
 import ProductCard from "../components/ProductCard/ProductCard";
 import SmallCarousel from "../components/Carousels/SmallCarousel/SmallCarousel";
 import Card from "../components/Card/Card";
-import Loaading from "../components/Loading/Loaading";
+import Loading from "../components/Loading/Loaading";
 import Link from "next/link";
 
 export default function Home(props) {
@@ -21,7 +21,7 @@ export default function Home(props) {
   const event = [];
 
   if (!props) {
-    return <Loaading />;
+    return <Loading />;
   }
 
   // const selectStore = () => {};
@@ -67,7 +67,7 @@ export default function Home(props) {
             ))}
           </div>
           <Link href="/specialty-diets">
-            <a className={`text-danger ms-2`}>Explore all diets {' > '}</a>
+            <a className={`text-danger ms-2`}>Explore all diets {" > "}</a>
           </Link>
         </div>
       )}
@@ -93,7 +93,6 @@ export default function Home(props) {
 }
 
 export async function getStaticProps() {
-  
   const diet = await getContentfulItems("diet");
   const entries = await getContentfulItems("corporation");
   const specialEvents = await getContentfulItems("specialEvents");
@@ -118,4 +117,3 @@ export async function getStaticProps() {
     },
   };
 }
-

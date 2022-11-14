@@ -23,6 +23,7 @@ export default async function handler(req, res) {
           },
         },
         quantity: item.amount,
+    
       })
     );
 
@@ -38,6 +39,9 @@ export default async function handler(req, res) {
         payment_method_types: ["card"],
         line_items: items,
         mode: "payment",
+        phone_number_collection: {
+          enabled: true,
+        },
         success_url: `${redirectURL}/success/${userId}/{CHECKOUT_SESSION_ID}`,
         cancel_url: `${redirectURL}/canceled/{CHECKOUT_SESSION_ID}`,
       });

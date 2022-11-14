@@ -1,6 +1,7 @@
 import { buffer } from "micro";
 import Cors from "micro-cors";
 import Stripe from "stripe";
+import twilio from 'twilio'
 import { doc, setDoc, collection, addDoc } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
@@ -15,6 +16,11 @@ const firebaseConfig = {
   appId: "1:367701901449:web:6f25ff7dc6c4714dfc0658",
   measurementId: "G-ELRQXE87MD",
 };
+
+const TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID; // Your Account SID from www.twilio.com/console
+const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN;
+
+const client = twilio(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -56,6 +62,36 @@ const createOrder = async (sessionId) => {
   }
 }
 
+const sendSMStoCustomer = async (sessionId) => {
+  const checkout_session = await stripe.checkout.sessions.retrieve(sessionId, {
+    expand: ['line_items', 'customer']
+  })
+  const data = { session: checkout_session }
+
+  const customerPhoneNumber = data.session.customer_details.phone
+
+  if(customerPhoneNumber){
+  client.messages
+  .create({
+    body: `Pete's Order: ${data.session.success_url}`,
+    from: '+13393452629',
+    to: customerPhoneNumber,
+  })
+  .then((message) =>
+    res.json({
+      success: true,
+      message: message.sid
+    })
+  )
+  .catch((error) => {
+    console.log(error);
+    res.json({
+      success: false,
+    });
+  });}
+
+}
+
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 const checkout = async (req, res) => {
   if (req.method === "POST") {
@@ -83,6 +119,7 @@ const checkout = async (req, res) => {
         const checkout_session = event.data.object;
        
         await createOrder(checkout_session.id)
+        await sendSMStoCustomer(checkout_session.id)
 
         break;
 
