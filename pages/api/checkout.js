@@ -73,7 +73,7 @@ const sendSMStoCustomer = async (sessionId) => {
   console.log(customerPhoneNumber)
 
   if(customerPhoneNumber){
-  client.messages
+  await client.messages
   .create({
     body: `Pete's Order: ${data.session.success_url}`,
     from: '+13393452629',
