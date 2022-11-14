@@ -75,7 +75,8 @@ const sendSMStoCustomer = async (sessionId) => {
   if(customerPhoneNumber){
   await client.messages
   .create({
-    body: `Pete's Order: ${data.session.success_url}`,
+    body: `Thank you for your order! 
+       https://grocery-store-git-main-berna2103.vercel.app/my-account`,
     from: '+13393452629',
     to: customerPhoneNumber,
   })
