@@ -70,6 +70,8 @@ const sendSMStoCustomer = async (sessionId) => {
 
   const customerPhoneNumber = data.session.customer_details.phone
 
+  console.log(customerPhoneNumber)
+
   if(customerPhoneNumber){
   client.messages
   .create({
